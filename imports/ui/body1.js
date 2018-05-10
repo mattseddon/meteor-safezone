@@ -6,15 +6,15 @@ import { Tasks } from '../api/tasks.js';
 
 import './task.js';
 import './chart.js';
-import './body.html';
+import './body1.html';
 
 
-Template.body.onCreated(function bodyOnCreated() {
+Template.body1.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('tasks');
 });
 
-Template.body.helpers({
+Template.body1.helpers({
   tasks() {
     const instance = Template.instance();
     if (instance.state.get('hideCompleted')) {
@@ -29,7 +29,7 @@ Template.body.helpers({
   },
 });
 
-Template.body.events({
+Template.body1.events({
   'submit .new-task'(event) {
     // Prevent default browser form submit
     event.preventDefault();
