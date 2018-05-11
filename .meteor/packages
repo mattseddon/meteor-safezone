@@ -24,4 +24,5 @@ arillo:flow-router-helpers
 reactive-dict
 accounts-ui
 accounts-password
-bootstrap
+fourseven:scss
+twbs:bootstrap
