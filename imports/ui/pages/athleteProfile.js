@@ -2,19 +2,19 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
-import { Tasks } from '../api/tasks.js';
+import { Tasks } from '../../api/tasks.js';
 
-import './task.js';
-import './chart.js';
-import './body1.html';
+import '../components/task.js';
+import '../components/chart.js';
+import './athleteProfile.html';
 
 
-Template.body1.onCreated(function bodyOnCreated() {
+Template.athleteProfile.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('tasks');
 });
 
-Template.body1.helpers({
+Template.athleteProfile.helpers({
   tasks() {
     const instance = Template.instance();
     if (instance.state.get('hideCompleted')) {
@@ -29,7 +29,7 @@ Template.body1.helpers({
   },
 });
 
-Template.body1.events({
+Template.athleteProfile.events({
   'submit .new-task'(event) {
     // Prevent default browser form submit
     event.preventDefault();
