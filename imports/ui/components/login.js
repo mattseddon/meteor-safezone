@@ -45,9 +45,9 @@ Template.login.onRendered(function(){
       // Log the user in.
       Meteor.loginWithPassword(user.email, user.password, function(error){
         if(error){
-          Bert.alert(error.reason, 'danger');
+          console.log('fucked');
         } else {
-          Bert.alert('Logged in!', 'success');
+          FlowRouter.redirect('/');
         }
       });
     }

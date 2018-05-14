@@ -26,3 +26,4 @@ accounts-ui
 accounts-password
 fourseven:scss
 twbs:bootstrap
+tsega:bootstrap3-datetimepicker
