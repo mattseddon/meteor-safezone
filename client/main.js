@@ -1,5 +1,6 @@
 import '../imports/ui/pages/athleteProfile.js';
 import '../imports/startup/accounts-config.js';
+//import '../imports/ui/components/login.js'
 
 import '../imports/ui/pages/homePage.html'
 import '../imports/ui/pages/athleteProfile.html'

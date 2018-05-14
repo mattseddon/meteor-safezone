@@ -7,52 +7,55 @@
 * Created
 */
 
+
+
 Template.login.onCreated(function(){
-  // Code to run when template is created goes here.
 });
 
 /*
 * Rendered
 */
 
-Template.login.onRendered(function(){
-  $('#application-login').validate({
-    rules: {
-      emailAddress: {
-        required: true,
-        email: true
-      },
-      password: {
-        required: true
-      }
-    },
-    messages: {
-      emailAddress: {
-        required: "Please enter your email address to login.",
-        email: "Please enter a valid email address."
-      },
-      password: {
-        required: "Please enter your password to login."
-      }
-    },
-    submitHandler: function(){
-      // Grab the user's details.
-      user = {
-        email: $('[name="emailAddress"]').val(),
-        password: $('[name="password"]').val()
-      }
-
-      // Log the user in.
-      Meteor.loginWithPassword(user.email, user.password, function(error){
-        if(error){
-          console.log('fucked');
-        } else {
-          FlowRouter.redirect('/');
-        }
-      });
-    }
-  });
-});
+// Template.login.onRendered(function(){
+//   $('#application-login').validate({
+//     rules: {
+//       emailAddress: {
+//         required: true,
+//         email: true
+//       },
+//       password: {
+//         required: true
+//       }
+//     },
+//     messages: {
+//       emailAddress: {
+//         required: "Please enter your email address to login.",
+//         email: "Please enter a valid email address."
+//       },
+//       password: {
+//         required: "Please enter your password to login."
+//       }
+//     },
+    // submitHandler: function(){
+    //   // Grab the user's details.
+    //   user = {
+    //     email: $('[name="emailAddress"]').val(),
+    //     password: $('[name="password"]').val()
+    //   }
+    //
+    //   // Log the user in.
+    //   Meteor.loginWithPassword(user.email, user.password, function(error){
+    //     if(error){
+    //       console.log(error.reason);
+    //     } else {
+    //       console.log('nothing happened!')
+    //       FlowRouter.redirect('homePage')
+    //       //Bert.alert('Logged in!', 'success');
+    //     }
+    //   });
+    // },
+//   });
+// });
 
 /*
 * Helpers
@@ -69,8 +72,21 @@ Template.login.helpers({
 */
 
 Template.login.events({
-  'submit form': function(e){
+  'submit form': function(event){
     // Prevent form from submitting.
-    e.preventDefault();
+    event.preventDefault();
+    user = {
+      email: $('[name="emailAddress"]').val(),
+      password: $('[name="password"]').val()
+    }
+
+    // Log the user in.
+    Meteor.loginWithPassword(user.email, user.password, function(error){
+      if(error){
+        Bert.alert(error.reason, 'danger');
+      } else {
+        Bert.alert('Logged in!', 'success');
+      }
+    });
   }
 });
