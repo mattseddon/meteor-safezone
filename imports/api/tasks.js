@@ -30,7 +30,7 @@ Meteor.methods({
       text,
       createdAt: new Date(),
       owner: Meteor.userId(),
-      username: Meteor.user().username,
+      username: Meteor.user().emails[0].address,
     });
   },
   'tasks.remove'(taskId) {

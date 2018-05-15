@@ -8,8 +8,8 @@
 
 html {
   font-family: sans-serif; /* 1 */
-  -ms-text-size-adjust: 100%; /* 2 */
-  -webkit-text-size-adjust: 100%; /* 2 */
+  -ms-text-size-adjust: 80%; /* 2 */
+  -webkit-text-size-adjust: 80%; /* 2 */
 }
 
 /**
@@ -550,7 +550,7 @@ are based on 10px sizing. So basically 1.5rem = 15px :) */
 html {
   font-size: 62.5%; }
 body {
-  font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
+  font-size: 1.2em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
   font-weight: 400;
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -676,6 +676,7 @@ input[type="button"].button-secondary:focus {
 
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+option,
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -684,15 +685,18 @@ input[type="tel"],
 input[type="url"],
 input[type="password"],
 textarea,
-select {
+select,
+ /* {
   height: 38px;
-  padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+  padding: 6px 10px;  The 6px vertically centers text on FF, ignored by Webkit
   background-color: #fff;
   border: 1px solid #D1D1D1;
   border-radius: 4px;
   box-shadow: none;
-  box-sizing: border-box; }
+  box-sizing: border-box; } */
 /* Removes awkward default styles on some inputs for iOS */
+select,
+option,
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -708,6 +712,8 @@ textarea {
   min-height: 65px;
   padding-top: 6px;
   padding-bottom: 6px; }
+/* select:focus, */
+option:focus,
 input[type="email"]:focus,
 input[type="number"]:focus,
 input[type="search"]:focus,
@@ -791,6 +797,7 @@ td:last-child {
 button,
 .button {
   margin-bottom: 1rem; }
+option,
 input,
 textarea,
 select,

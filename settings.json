@@ -1,0 +1,30 @@
+{
+  "public": {
+    "sessionTypes": [
+      "Gym",
+      "Linear Speed",
+      "Skills",
+      "Conditioning",
+      "Rehab"
+    ],
+    "athleteStatuses": [
+      "Normal",
+      "Rehab"
+    ],
+    "sports": [
+      "Football",
+      "Basketball",
+      "Baseball",
+      "Lacrosse",
+      "Track",
+      "Field",
+      "Gymnastics",
+      "Other"
+    ],
+    "lineups": [
+      "Starting",
+      "Bench",
+      "Squad"
+    ]
+  }
+}

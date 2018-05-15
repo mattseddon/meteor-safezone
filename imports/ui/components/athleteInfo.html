@@ -1,0 +1,47 @@
+<template name="athleteInfo">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" value="{{name}}">
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <label for="name">Sport</label>
+            <select name="sport" class="form-control">
+              {{#each sports}}
+              <option value="{{this}}">{{this}}</option>
+              {{/each}}
+            </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <label for="name">Lineup</label>
+          <select name="lineup" class="form-control">
+            {{#each lineups}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <label for="name">Position</label>
+          <input type="text" class="form-control" name="pos" value="{{pos}}" placeholder="What is your position?">
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <label for="name">Number</label>
+          <input type="text" class="form-control" name="number" value="{{number}}" placeholder="What is your squad number?">
+        </div>
+      </div>
+    </div>
+      {{#if isProfile}}
+        <div class="form-group">
+          <input type="submit" class="button button-primary col-xs-4 col-sm-4 col-md-4 col-lg-4" value="Save">
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</template>

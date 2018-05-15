@@ -2,16 +2,22 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
-import { Tasks } from '../../api/tasks.js';
+import { Tasks }   from '../../api/tasks.js';
+import { Athletes } from '../../api/athletes.js'
 
 import '../components/task.js';
 import '../components/chart.js';
+import '../components/athleteInfo.js';
+
 import './athleteProfile.html';
 
+
+//var athletes = ;
 
 Template.athleteProfile.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('tasks');
+  Meteor.subscribe('athletes');
 });
 
 Template.athleteProfile.helpers({
@@ -27,7 +33,16 @@ Template.athleteProfile.helpers({
   incompleteCount() {
     return Tasks.find({ checked: { $ne: true } }).count();
   },
+  athlete() {
+    var getAthlete = Athletes.findOne( { "userId": Meteor.userId() } );
+    if ( getAthlete ) {
+      getAthlete.context = "profile";
+      return getAthlete;
+    }
+  },
 });
+
+
 
 Template.athleteProfile.events({
   'submit .new-task'(event) {

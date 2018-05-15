@@ -6,7 +6,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.42",
+    "babel-polyfill": "^6.26.0",
     "chart.js": "^2.7.2",
-    "meteor-node-stubs": "^0.3.2"
+    "meteor-node-stubs": "^0.3.2",
+    "moment": "^2.22.1",
+    "simpl-schema": "^1.5.0"
   }
 }

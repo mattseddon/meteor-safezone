@@ -24,8 +24,11 @@
       {{/each}}
     </ul>
 
-    <ul>{{> chart}}</ul>
+    {{> chart}}
 
+  {{#with athlete}}
+    {{> athleteInfo}}
+  {{/with}}
   </div>
 </body>
 </template>

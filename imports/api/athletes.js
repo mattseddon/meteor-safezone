@@ -1,17 +1,18 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
+import SimpleSchema from 'simpl-schema';
 
 export const Athletes = new Mongo.Collection('athletes');
 
 if (Meteor.isServer) {
   // This code only runs on the server
   // Only publish tasks that are public or belong to the current user
-  Meteor.publish('Athletes', function athletesPublication() {
-    return Athletes.find({
-      userId: this.userId,
+
+    Meteor.publish('athletes', function athletesPublication() {
+      return Athletes.find( { userId: this.userId });
     });
-  });
+
 
   Accounts.onCreateUser( function( options, user ) {
     // Here, we have access to the newly created user document. We want to set up
@@ -38,7 +39,24 @@ if (Meteor.isServer) {
     return user;
   });
 
+  Meteor.methods({
+    updateAthlete: function( athlete ){
+      // check( athlete, Athletes.simpleSchema() );
+      Athletes.simpleSchema().validate(athlete, {check});
+      try {
+        var athleteId = Athletes.update( { "userId": athlete.userId }, {
+          $set: athlete
+        });
+
+        return athleteId;
+      } catch( exception ) {
+        return exception;
+      }
+    }
+  });
+
 }
+
 
 Athletes.deny({
   insert: function(){
