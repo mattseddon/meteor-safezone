@@ -24,7 +24,27 @@
       {{/each}}
     </ul>
 
+  {{#with impulses}}
     {{> chart}}
+  {{/with}}
+
+  {{#each impulses}}
+    <div class="panel panel-default pizza">
+      <div class="panel-body">
+        <p><strong>Date Logged:</strong> {{date}}</p>
+        <p><strong>RPE:</strong> {{sessionRPE}}</p>
+        {{#with athlete this.userId}}
+          <p><strong>Athlete</strong>: {{name}}</p>
+        {{/with}}
+
+        {{#with athlete this.userId}}
+          <p><strong>Logged by:</strong> {{name}}</p>
+        {{/with}}
+      </div>
+    </div>
+  {{else}}
+    <p class="alert alert-info">You haven't logged any impulses yet! <a href="{{pathFor 'impulse'}}">Log an impulse now</a>.</p>
+  {{/each}}
 
   {{#with athlete}}
     {{> athleteInfo}}

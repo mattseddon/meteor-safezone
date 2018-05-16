@@ -1,20 +1,17 @@
 import moment from 'moment';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
-import './impulses.html';
-import './dateTimePicker.html';
 import './dateTimePicker.js';
 import { Athletes } from '../../api/athletes.js';
 import { Impulses } from '../../api/impulses.js';
+import {placeImpulse} from  '../../api/impulses.js';
+
+import './impulses.html';
+
 
 //only impulses published are for this user
 Template.impulses.helpers({
-  impulses: function() {
-    var getImpulses = Impulses.find();
 
-    if ( getImpulses ) {
-      return getImpulses;
-    }
-  },
   athlete: function( userId ) {
     var getAthlete = Athletes.findOne( { "userId": userId } );
 
@@ -36,11 +33,14 @@ Template.impulses.helpers({
   }
 });
 
-Template.athleteProfile.onCreated(function bodyOnCreated() {
-  this.state = new ReactiveDict();
-  Meteor.subscribe('impulses');
-  Meteor.subscribe('athletes');
+ Template.impulses.onCreated(function(){
+   delete Session.keys['calcImpulse'];
 });
+// Template.impulses.onCreated(function bodyOnCreated() {
+//   this.state = new ReactiveDict();
+//   Meteor.subscribe('impulses');
+//   Meteor.subscribe('athletes');
+// });
 //
 // Template.impulse.onRendered( function() {
 //
@@ -110,7 +110,31 @@ Template.impulses.events({
   var calcImpulse = sessionRPE * sessionLength;
   Session.set('calcImpulse', calcImpulse);
   },
-  'submit form': function( event ) {
+  'submit form': function( event, template ) {
     event.preventDefault();
-  }
+
+    console.log(template.find( "[name='dateTimeCompleted']" ).value);
+
+    var impulse  = {
+             userId:            Meteor.userId(),
+             date:              (new Date()),
+             athleteStatus:     template.find( "[name='athleteStatus']"     ).value,
+             sessionType:       template.find( "[name='sessionType']"       ).value,
+             sessionRPE:        Number(template.find( "[name='sessionRPE']"        ).value),
+             sessionLength:     Number(template.find( "[name='sessionLength']"     ).value),
+             sessionImpulse:    Number(template.find( "[name='sessionImpulse']"    ).value),
+             dateTimeCompleted: moment(template.find( "[name='dateTimeCompleted']" ).value,"YYYY-MMM-DD").format()
+           };
+           console.log(impulse)
+           Meteor.call( "placeImpulse", impulse, function( error, response ) {
+             if ( error ) {
+               Bert.alert( error.reason, "danger" );
+             } else {
+               Bert.alert( "Impulse submitted!", "success" );
+
+               FlowRouter.go( "profile" );
+             }
+           });
+
+  },
 });

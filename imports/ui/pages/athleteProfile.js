@@ -4,6 +4,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 
 import { Tasks }   from '../../api/tasks.js';
 import { Athletes } from '../../api/athletes.js'
+import { Impulses } from '../../api/impulses.js'
 
 import '../components/task.js';
 import '../components/chart.js';
@@ -18,6 +19,7 @@ Template.athleteProfile.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('tasks');
   Meteor.subscribe('athletes');
+  Meteor.subscribe('impulses');
 });
 
 Template.athleteProfile.helpers({
@@ -38,6 +40,12 @@ Template.athleteProfile.helpers({
     if ( getAthlete ) {
       getAthlete.context = "profile";
       return getAthlete;
+    }
+  },
+  impulses() {
+    var getImpulses = Impulses.find();
+    if ( getImpulses ) {
+      return getImpulses;
     }
   },
 });

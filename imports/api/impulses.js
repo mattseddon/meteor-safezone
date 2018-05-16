@@ -13,23 +13,24 @@ if (Meteor.isServer) {
       return Impulses.find( { userId: this.userId });
     });
 
-    Meteor.methods({
-      placeImpulse: function( impulse ){
-        Impulses.simpleSchema().validate(impulse, {check});
-
-        Impulses.insert({
-          userId: this.userId,
-          date: (new Date()),
-          athleteStatus: impulse.athleteStatus,
-          sessionType: impulse.sessionType,
-          sessionRPE: impulse.sessionRPE,
-          sessionLength: impulse.sessionLength,
-          sessionImpulse: impulse.sessionImpulse,
-          dateTimeCompleted: impulse.dateTimeCompleted
-        });
-      }
-    });
 }
+
+Meteor.methods({
+  placeImpulse: function( impulse ){
+    Impulses.simpleSchema().validate(impulse, {check});
+
+    Impulses.insert({
+      userId: impulse.userId,
+      date: impulse.date,
+      athleteStatus: impulse.athleteStatus,
+      sessionType: impulse.sessionType,
+      sessionRPE: impulse.sessionRPE,
+      sessionLength: impulse.sessionLength,
+      sessionImpulse: impulse.sessionImpulse,
+      dateTimeCompleted: impulse.dateTimeCompleted
+    });
+  }
+});
 
 Impulses.deny({
   insert: function(){
@@ -45,11 +46,15 @@ Impulses.deny({
 var ImpulsesSchema = new SimpleSchema({
   "userId": {
     type: String,
-    label: "Customer User ID"
+    label: "Athlete User ID"
   },
   "date": {
     type: Date,
     label: "Date Entry Was Logged"
+  },
+  "athleteStatus": {
+    type: String,
+    label: "Status of Athlete"
   },
   "sessionType": {
     type: String,
@@ -68,7 +73,7 @@ var ImpulsesSchema = new SimpleSchema({
     label: "Impulse of Session"
   },
   "dateTimeCompleted": {
-    type: Date,
+    type: "datetime",
     label: "Date/Time Session was Completed"
   }
 });
