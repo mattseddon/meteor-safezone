@@ -1,6 +1,6 @@
 {
   "public": {
-    "sessionTypes": [
+    "effortTypes": [
       "Gym",
       "Linear Speed",
       "Skills",

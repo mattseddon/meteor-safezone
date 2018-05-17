@@ -1,0 +1,52 @@
+<template name="mefforts">
+
+  <h2 class='text-center'>Manage Your Previous Efforts</h2>
+  {{#each impulses}}
+  <div class="container" style="border-radius: 25px; margin-top: 50px; border: 1px solid #D3D3D3; display: flex; justify-content: center;">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 50px;">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Date Completed</label>
+              <input type="datetime" disabled=true class="form-control" value="{{dateTimeCompleted}}" style="background-color:white;">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Status</label>
+              <input type="text" disabled=true class="form-control" value="{{athleteStatus}}" style="background-color:white;">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Type</label>
+              <input type="text" disabled=true class="form-control" value="{{sessionType}}" style="background-color:white;">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Session RPE</label>
+                <input type="number" disabled=true class="form-control" value="{{sessionRPE}}" style="background-color:white;">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Session Duration</label>
+                <input type="number" disabled=true class="form-control" value="{{sessionLength}}" style="background-color:white;">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Session Impulse</label>
+              <input type="number" disabled=true class="form-control" value="{{sessionImpulse}}" style="background-color:white;">
+            </div>
+          </div>
+        </div>
+        <div class="submit-row text-center" style="margin-top: 50px; margin-bottom: 50px;">
+          <button class="delete button-secondary">Delete effort</button>
+          <!-- <input type="submit" id="delete" class="button button-secondary" value="Delete effort"> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  {{else}}
+  <div class='container text-center'>
+    <p class="alert alert-info">You haven't logged any impulses yet! <a href="{{pathFor 'impulse'}}">Log an impulse now</a>.</p>
+  </div>
+  {{/each}}
+</template>
