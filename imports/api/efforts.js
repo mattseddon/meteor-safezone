@@ -21,13 +21,13 @@ Meteor.methods({
 
     Efforts.insert({
       userId: effort.userId,
-      date: effort.date,
+      createdDate: effort.createdDate,
       athleteStatus: effort.athleteStatus,
       effortType: effort.effortType,
       effortRPE: effort.effortRPE,
-      effortLength: effort.effortLength,
+      effortDuration: effort.effortDuration,
       effortImpulse: effort.effortImpulse,
-      dateTimeCompleted: effort.dateTimeCompleted
+      dateTimeCompleted: effort.dateTimeCompleted,
       comments: effort.comments
     });
   },
@@ -76,9 +76,9 @@ var EffortsSchema = new SimpleSchema({
     type: Number,
     label: "RPE of Effort"
   },
-  "effortLength": {
+  "effortDuration": {
     type: Number,
-    label: "Length of Effort"
+    label: "Duration of Effort"
   },
   "effortImpulse": {
     type: Number,
@@ -87,10 +87,11 @@ var EffortsSchema = new SimpleSchema({
   "dateTimeCompleted": {
     type: "datetime",
     label: "Date/Time Effort was Completed"
-  }
+  },
   "comments": {
     type: "text",
-    label: "Comments on Effort"
+    label: "Comments on Effort",
+    required:false
   }
 });
 

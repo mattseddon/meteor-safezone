@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
-import './dateTimePicker.js';
+import '../components/dateTimePicker.js';
 // import { Athletes } from '../../api/athletes.js';
 import {  Efforts    } from '../../api/efforts.js';
 import { placeEffort } from  '../../api/efforts.js';
@@ -106,8 +106,8 @@ Template.logEffort.helpers({
 Template.logEffort.events({
   'change': function(event, template) {
   var effortRPE = template.find("input[name=effortRPE]").valueAsNumber;
-  var effortLength = template.find("input[name=effortLength]").valueAsNumber;
-  var calcImpulse = effortRPE * effortLength;
+  var effortDuration = template.find("input[name=effortDuration]").valueAsNumber;
+  var calcImpulse = effortRPE * effortDuration;
   Session.set('calcImpulse', calcImpulse);
   },
   'submit form': function( event, template ) {
@@ -115,15 +115,16 @@ Template.logEffort.events({
 
     // console.log(template.find( "[name='dateTimeCompleted']" ).value);
 
-    var impulse  = {
+    var effort  = {
              userId:            Meteor.userId(),
              createdDate:       (new moment().format("YYYY-MM-DD HH:mm")),
              athleteStatus:            template.find( "[name='athleteStatus']"    ).value,
              effortType:               template.find( "[name='effortType']"       ).value,
-             effortnRPE:        Number(template.find( "[name='effortRPE']"        ).value),
-             effortDuration:    Number(template.find( "[name='effortLength']"     ).value),
+             effortRPE:         Number(template.find( "[name='effortRPE']"        ).value),
+             effortDuration:    Number(template.find( "[name='effortDuration']"   ).value),
              effortImpulse:     Number(template.find( "[name='effortImpulse']"    ).value),
-             dateTimeCompleted: moment(template.find( "[name='dateTimeCompleted']" ).value,"YYYY-MMM-DD HH:mm").format()
+             dateTimeCompleted:        template.find( "[name='dateTimeCompleted']" ).value,
+             comments:                 template.find( "[name='comments']" ).value
            };
            Meteor.call( "placeEffort", effort, function( error, response ) {
              if ( error ) {
