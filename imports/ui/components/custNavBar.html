@@ -1,0 +1,35 @@
+<!-- This is a global helper defined by meteor? -->
+<template name='custNavBar'>
+{{#if currentUser}}
+<!-- <nav id="custNavBar" > -->
+ <!-- <div class="container" style="background:#33C3F0; width:100%;"> -->
+    <div class="custNavBar" style="width:80%;margin-left:10%; margin-top :0px;">
+      <div class="pure-menu pure-menu-horizontal">
+
+          <!-- <a href="{{pathFor profile}}" class="pure-menu-horizontal pure-menu-link">Profile</a>
+
+            <a href="{{pathFor logEffort}}" class="pure-menu-horizontal pure-menu-link">Log Effort</a>
+
+            <a href="{{pathFor manageEfforts}}" class="pure-menu-horizontal pure-menu-link">Manage Efforts</a>
+
+            <a href="#" class="pure-menu-horizontal pure-menu-link">Finance</a> -->
+            <ul class="pure-menu-list" style="height:40px;">
+                <li class="pure-menu-item"><a href="{{pathFor 'profile'}}"       class="pure-menu-link" role="button">Profile</a></li>
+                <!-- <li class="pure-menu-item"><a href="{{pathFor 'logEffort'}}"     class="pure-menu-link" role="button">Log Effort</a></li> -->
+                <!-- <li class="pure-menu-item"><a href="{{pathFor 'manageEfforts'}}" class="pure-menu-link" role="button">Manage Efforts</a></li> -->
+                <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                  <a id="menuLink1" class="pure-menu-link">Efforts</a>
+                    <ul class="pure-menu-children">
+                      <li class="pure-menu-item"><a href="{{pathFor 'logEffort'}}" class="pure-menu-link">Log Effort</a></li>
+                      <li class="pure-menu-item"><a href="{{pathFor 'manageEfforts'}}" class="pure-menu-link">Manage Efforts</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+
+      </div>
+    </div>
+  <!-- </div> -->
+<!-- </nav> -->
+{{/if}}
+</template>
