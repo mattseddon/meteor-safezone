@@ -123,7 +123,7 @@ Template.logEffort.events({
              effortRPE:         Number(template.find( "[name='effortRPE']"        ).value),
              effortDuration:    Number(template.find( "[name='effortDuration']"   ).value),
              effortImpulse:     Number(template.find( "[name='effortImpulse']"    ).value),
-             dateTimeCompleted:        template.find( "[name='dateTimeCompleted']" ).value,
+             dateTimeCompleted: moment(template.find( "[name='dateTimeCompleted']" ).value,"DD-MMM-YYYY HH:mm").format("YYYY-MM-DD HH:mm"),
              comments:                 template.find( "[name='comments']" ).value
            };
            Meteor.call( "placeEffort", effort, function( error, response ) {

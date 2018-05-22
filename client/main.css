@@ -953,7 +953,7 @@ there.
       padding: 0;
       z-index: 5;
       width:auto;
-      background-color: #1EAEDB;
+      background-color: #000;
   }
 
   .pure-menu-horizontal .pure-menu-children {
@@ -1061,6 +1061,7 @@ there.
   .pure-menu-link:hover,
   .pure-menu-link:focus {
       background-color: #eee;
+      color: #000;
       text-decoration: none;
   }
 
@@ -1076,6 +1077,6 @@ there.
       top: 0;
       left: 0;
       width: 100%;
-      background-color: #33C3F0;
+      background-color: #000;
       /* height: 150px */
   }

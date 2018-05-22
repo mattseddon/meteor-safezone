@@ -1,0 +1,80 @@
+<template name="logWellness">
+  <div class="container">
+    <!-- <div class="container text-center">
+        <h2>Log Your Effort</h2>
+    </div> -->
+    <form id="log-wellness" style="margin-top:20px">
+    <!--<h3 class="page-header">How do you want to order?</h3>-->
+
+<!--
+can remove the breakdown of xs, sm, md, lg and just state 12 if you want
+don't even need to state 12 if you want to fill the screen (defaulted to 12 I think)
+  -->
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <label for="name">Sleep Quality</label>
+                <input type="number" class="form-control" name="sleepQuality" min=1 max=5 value=3 style="color:#fff;text-align:center;background-color:#FF9500;">
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <label for="name">Sleep Length (Hours)</label>
+                <input type="number" class="form-control" name="sleepLength" min=0 max=24 value=8 style="color:#fff;text-align:center;background-color:#4CD964;">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <label for="name">Mood</label>
+                <input type="number" class="form-control" name="mood" min=1 max=5 value=3 style="color:#fff;text-align:center;background-color:#FF9500;">
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <label for="name">Energy</label>
+                <input type="number" class="form-control" name="energy" min=1 max=5 value=3 style="color:#fff;text-align:center;background-color:#FF9500;">
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <label for="name">Stress</label>
+                <input type="number" class="form-control" name="stress" min=1 max=5 value=3 style="color:#fff;text-align:center;background-color:#FF9500;">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <label for="name">Soreness: Upper Body</label>
+                <input type="number" class="form-control" name="upperSoreness" min=1 max=5 value=3 style="color:#fff;text-align:center;background-color:#FF9500;">
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <label for="name">Soreness: Lower Body</label>
+                <input type="number" class="form-control" name="lowerSoreness" min=0 max=5 value=3 style="color:#fff;text-align:center;background-color:#FF9500;">
+              </div>
+            </div>
+          </div>
+          <div>
+            {{> dateTimePicker}}
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <label for="name">Comments</label>
+              <input type="text" class="form-control" name="comments" placeholder="Any comments?">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="submit-row text-center" style="margin-top: 20px;">
+        <input type="submit" class="button button-primary" value="Log wellness">
+      </div>
+    </form>
+    <div class="row text-center" style="margin-top: 0px; margin-bottom: 0px;">
+      <img width="80" height="80" src="/sleep.png" hspace="10">
+      <img width="80" height="80" src="/brain.png" hspace="10">
+      <img width="80" height="80" src="/logo1.png" hspace="10">
+      <img width="80" height="80" src="/thunderbolt.png" hspace="10">
+      <img width="80" height="80" src="/questionmark.png" hspace="10">
+    </div>
+  </div>
+
+
+</template>

@@ -2,9 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
-import { Tasks }   from '../../api/tasks.js';
+import { Tasks } from '../../api/tasks.js';
 import { Athletes } from '../../api/athletes.js'
 import { Efforts } from '../../api/efforts.js'
+import { Wellnesses } from '../../api/wellnesses.js'
 
 import '../components/task.js';
 import '../components/chart.js';
@@ -20,6 +21,7 @@ Template.athleteProfile.onCreated(function bodyOnCreated() {
   Meteor.subscribe('tasks');
   Meteor.subscribe('athletes');
   Meteor.subscribe('efforts');
+  Meteor.subscribe('wellnesses');
 });
 
 Template.athleteProfile.helpers({
@@ -35,13 +37,13 @@ Template.athleteProfile.helpers({
   incompleteCount() {
     return Tasks.find({ checked: { $ne: true } }).count();
   },
-  // athlete() {
-  //   var getAthlete = Athletes.findOne( { "userId": Meteor.userId() } );
-  //   if ( getAthlete ) {
-  //     getAthlete.context = "profile";
-  //     return getAthlete;
-  //   }
-  // },
+  athlete() {
+    var getAthlete = Athletes.findOne( { "userId": Meteor.userId() } );
+    if ( getAthlete ) {
+      getAthlete.context = "profile";
+      return getAthlete;
+    }
+  },
 });
 
 Template.athleteProfile.events({
