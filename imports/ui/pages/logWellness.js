@@ -8,6 +8,79 @@ import { placeWellness } from  '../../api/wellnesses.js';
 
 import './logWellness.html';
 
+
+Template.logWellness.helpers({
+  showKeyScale() {
+    return Session.get('showKeyScale');
+  },
+  showInstructions() {
+    return Session.get('showInstructions');
+  },
+  });
+
+Template.logWellness.onCreated(function(){
+  Session.set('showKeyScale'    , false);
+  Session.set('showInstructions', false);
+});
+
+
+function collapseSection(element) {
+  // get the height of the element's inner content, regardless of its actual size
+  var sectionHeight = element.scrollHeight;
+
+  // temporarily disable all css transitions
+  var elementTransition = element.style.transition;
+  element.style.transition = '';
+
+  // on the next frame (as soon as the previous style change has taken effect),
+  // explicitly set the element's height to its current pixel height, so we
+  // aren't transitioning out of 'auto'
+  requestAnimationFrame(function() {
+    element.style.height = sectionHeight + 'px';
+    element.style.transition = elementTransition;
+
+    // on the next frame (as soon as the previous style change has taken effect),
+    // have the element transition to height: 0
+    requestAnimationFrame(function() {
+      element.style.height = 0 + 'px';
+    });
+  });
+
+  // mark the section as "currently collapsed"
+  element.setAttribute('data-collapsed', 'true');
+}
+
+function expandSection(element) {
+  // get the height of the element's inner content, regardless of its actual size
+  var sectionHeight = element.scrollHeight;
+
+  // have the element transition to the height of its inner content
+  element.style.height = sectionHeight + 'px';
+
+  // when the next css transition finishes (which should be the one we just triggered)
+  element.addEventListener('transitionend', function(e) {
+    // remove this event listener so it only gets triggered once
+    element.removeEventListener('transitionend', arguments.callee);
+
+    // remove "height" from the element's inline styles, so it can return to its initial value
+    element.style.height = null;
+  });
+
+  // mark the section as "currently not collapsed"
+  element.setAttribute('data-collapsed', 'false');
+}
+
+function toggleSection(section) {
+var isCollapsed = section.getAttribute('data-collapsed') === 'true';
+
+  if(isCollapsed) {
+    expandSection(section)
+    section.setAttribute('data-collapsed', 'false')
+  } else {
+    collapseSection(section)
+  }
+}
+
 Template.logWellness.events({
   'submit form': function( event, template ) {
     event.preventDefault();
@@ -39,19 +112,6 @@ Template.logWellness.events({
            });
 
   },
-
-
-  // 'change': function(event,template) {
-    // checkFilled: function (name,template) {
-    //   var inputVal = template.find( "[name='"+ name + "']"      );
-    //     if (inputVal.value == "") {
-    //         inputVal.style.backgroundColor = "yellow";
-    //     }
-    //     else{
-    //         inputVal.style.backgroundColor = "";
-    //     }
-    // }
-  // },
 
   'change': function(event,template){
 
@@ -108,6 +168,34 @@ Template.logWellness.events({
 
       return false;
     }
-  }
+  },
+
+ // "click .showButton": function(event) {
+ //   console.log($(".hidder").first().show());
+ //  $(".hidder").first().show();
+ //  }
+  'click #showKeyScale'(event,template) {
+       event.preventDefault();
+       Session.set('showKeyScale', true);
+       toggleSection(template.find("[class='smartToggleKey']"));
+     },
+
+  'click #hideKeyScale'(event,template) {
+       event.preventDefault();
+       Session.set('showKeyScale', false);
+       toggleSection(template.find("[class='smartToggleKey']"));
+     },
+
+     'click #showInstructions'(event,template) {
+          event.preventDefault();
+          Session.set('showInstructions', true);
+          toggleSection(template.find("[class='smartToggleInstr']"));
+        },
+
+     'click #hideInstructions'(event,template) {
+          event.preventDefault();
+          Session.set('showInstructions', false);
+          toggleSection(template.find("[class='smartToggleInstr']"));
+        },
 
 });
