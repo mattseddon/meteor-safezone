@@ -15,24 +15,26 @@
       {{/if}}
     </div>
 
-    <div class="smartToggleInstr" data-collapsed='true' style="height:0px; text-align:left;">
-    <p>
-      <strong>Sleep Quality.      </strong>How well did you sleep last night?<br>
-      <strong>Sleep Length.       </strong>How long did you sleep last night? Measured to the nearest hour.<br>
-      <strong>Mood.               </strong>How is your mood?<br>
-      <strong>Energy.             </strong>How are your energy levels?<br>
-      <strong>Stress.             </strong>How are your stress levels?<br>
-      <strong>Fatigue: Upper Body.</strong>What is the condition of your upper body?<br>
-      <strong>Fatigue: Low Back.  </strong>What is the condition of your low back?<br>
-      <strong>Fatigue: Lower Body.</strong>What is the condition of your lower body?<br>
-    </p>
+    <div class="smartToggleInstr" data-collapsed='true' style="height:0px;text-align:center;">
+      <!-- <div class="container" style="text-align:center;"> -->
+        <p style="text-align:left;display: inline-block;">
+          <strong>Sleep Quality.       </strong>How was the quality of your sleep last night?<br>
+          <strong>Sleep Length.        </strong>How long did you sleep last night? Measured to the nearest hour.<br>
+          <strong>Mood.                </strong>How is your mood?<br>
+          <strong>Energy.              </strong>How are your energy levels?<br>
+          <strong>Stress.              </strong>How are your stress levels?<br>
+          <strong>Soreness: Upper Body. </strong>How is the soreness in your upper body?  No soreness is excellent.<br>
+          <strong>Soreness: Low Back.   </strong>How is the soreness in your low back?  No soreness is excellent.<br>
+          <strong>Soreness: Lower Body. </strong>How is the soreness in of your lower body?  No soreness is excellent.<br>
+        </p>
+      <!-- </div> -->
     </div>
 
     <div class="smartToggleKey" data-collapsed='true' style="color:#fff; height:0px; font-size:14px;text-align:center;">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="height: 50px; color:#000;"><span style="font-size:12px;font-weight: bold; position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"></span></div>
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="height: 50px;background-color:#FC0D00;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);">Terrible</span></div>
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="height: 50px;background-color:#FF3B30;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);">Poor</span></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="height: 50px;background-color:#FF3B30;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);">Bad</span></div>
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="height: 50px;background-color:#FF9500;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);">Normal</span></div>
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="height: 50px;background-color:#4CD964;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);">Good</span></div>
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="height: 50px;background-color:#2AC845;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);">Excellent</span></div>
@@ -73,15 +75,15 @@
           <div class="form-group">
             <div class="row">
               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <label for="name">Fatigue: Upper Body</label>
+                <label for="name">Soreness: Upper Body</label>
                 <input type="number" class="form-control" name="upperSoreness" min=1 max=5 value=3 style="color:#fff;text-align:center;background-color:#FF9500;">
               </div>
               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <label for="name">Fatigue: Low Back</label>
-                <input type="number" class="form-control" name="lbSoreness" min=1 max=5 value=3 style="color:#fff;text-align:center;background-color:#FF9500;">
+                <label for="name">Soreness: Low Back</label>
+                <input type="number" class="form-control" name="lowBackSoreness" min=1 max=5 value=3 style="color:#fff;text-align:center;background-color:#FF9500;">
               </div>
               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <label for="name">Fatigue: Lower Body</label>
+                <label for="name">Soreness: Lower Body</label>
                 <input type="number" class="form-control" name="lowerSoreness" min=0 max=5 value=3 style="color:#fff;text-align:center;background-color:#FF9500;">
               </div>
             </div>

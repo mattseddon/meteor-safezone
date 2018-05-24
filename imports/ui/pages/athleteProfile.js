@@ -9,6 +9,7 @@ import { Wellnesses } from '../../api/wellnesses.js'
 
 import '../components/task.js';
 import '../components/chart.js';
+import '../components/chartWellness.js';
 import '../components/athleteInfo.js';
 
 import './athleteProfile.html';

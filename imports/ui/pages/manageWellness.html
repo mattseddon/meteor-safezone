@@ -1,0 +1,74 @@
+<template name="manageWellness">
+
+  <!-- <h2 class='text-center'>Manage Your Previous wellnesses</h2> -->
+  {{#each wellnesses}}
+  <div class="container" style="border-radius: 25px; margin-top: 50px; border: 1px solid #D3D3D3; display: flex; justify-content: center;">
+    <!-- <div class="row"> -->
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 50px;">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Date Taken</label>
+              <input type="datetime" disabled=true class="form-control" value="{{dateTimeTaken}}" style="background-color:white;">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Sleep Quality</label>
+              <input type="text" disabled=true class="form-control" value="{{sleepQuality}}" style="background-color:white;">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Sleep Length</label>
+              <input type="text" disabled=true class="form-control" value="{{sleepLength}}" style="background-color:white;">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Mood</label>
+                <input type="number" disabled=true class="form-control" value="{{mood}}" style="background-color:white;">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Energy</label>
+                <input type="number" disabled=true class="form-control" value="{{energy}}" style="background-color:white;">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Stress</label>
+              <input type="number" disabled=true class="form-control" value="{{stress}}" style="background-color:white;">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Soreness: Upper Body</label>
+                <input type="number" disabled=true class="form-control" value="{{upperSoreness}}" style="background-color:white;">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Soreness: Low Back</label>
+                <input type="number" disabled=true class="form-control" value="{{lowBackSoreness}}" style="background-color:white;">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label for="name">Soreness: Lower Body</label>
+              <input type="number" disabled=true class="form-control" value="{{lowerSoreness}}" style="background-color:white;">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <label for="name">Comments</label>
+              <input type="text" disabled=true class="form-control" value="{{comments}}" style="background-color:white;">
+          </div>
+        </div>
+        <div class="submit-row text-center" style="margin-top: 30px; margin-bottom: 30px;">
+          <button class="delete button-secondary">Delete wellness</button>
+          <!-- <input type="submit" id="delete" class="button button-secondary" value="Delete effort"> -->
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+  {{else}}
+  <div class='container text-center'>
+    <p class="alert alert-info">You haven't logged your wellness yet! <a href="{{pathFor 'logWellness'}}">Log a wellness survey now</a>.</p>
+  </div>
+  {{/each}}
+</template>

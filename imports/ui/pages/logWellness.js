@@ -88,17 +88,18 @@ Template.logWellness.events({
     // console.log(template.find( "[name='dateTimeCompleted']" ).value);
 
     var wellness  = {
-             userId:        Meteor.userId(),
-             createdDate:  (new moment().format("YYYY-MM-DD HH:mm")),
-             sleepQuality:  Number(template.find( "[name='sleepQuality']"      ).value),
-             sleepLength:   Number(template.find( "[name='sleepLength']"       ).value),
-             mood:          Number(template.find( "[name='mood']"              ).value),
-             energy:        Number(template.find( "[name='energy']"            ).value),
-             stress:        Number(template.find( "[name='stress']"            ).value),
-             upperSoreness: Number(template.find( "[name='upperSoreness']"     ).value),
-             lowerSoreness: Number(template.find( "[name='lowerSoreness']"     ).value),
-             dateTimeTaken: moment(template.find( "[name='dateTimeCompleted']" ).value,"DD-MMM-YYYY HH:mm").format("YYYY-MM-DD HH:mm"),
-             comments:             template.find( "[name='comments']"          ).value
+             userId:          Meteor.userId(),
+             createdDate:    (new moment().format("YYYY-MM-DD HH:mm")),
+             sleepQuality:    Number(template.find( "[name='sleepQuality']"      ).value),
+             sleepLength:     Number(template.find( "[name='sleepLength']"       ).value),
+             mood:            Number(template.find( "[name='mood']"              ).value),
+             energy:          Number(template.find( "[name='energy']"            ).value),
+             stress:          Number(template.find( "[name='stress']"            ).value),
+             upperSoreness:   Number(template.find( "[name='upperSoreness']"     ).value),
+             lowBackSoreness: Number(template.find( "[name='lowBackSoreness']"   ).value),
+             lowerSoreness:   Number(template.find( "[name='lowerSoreness']"     ).value),
+             dateTimeTaken:   moment(template.find( "[name='dateTimeCompleted']" ).value,"DD-MMM-YYYY HH:mm").format("YYYY-MM-DD HH:mm"),
+             comments:               template.find( "[name='comments']"          ).value
            };
 
            Meteor.call( "placeWellness", wellness, function( error, response ) {

@@ -21,10 +21,17 @@
                   <a id="menuLink1" class="pure-menu-link">Efforts</a>
                     <ul class="pure-menu-children">
                       <li class="pure-menu-item"><a href="{{pathFor 'logEffort'}}" class="pure-menu-link">Log Effort</a></li>
-                      <li class="pure-menu-item"><a href="{{pathFor 'manageEfforts'}}" class="pure-menu-link">Manage Efforts</a></li>
+                      <li class="pure-menu-item"><a href="{{pathFor 'manageEfforts'}}" class="pure-menu-link">Manage Entries</a></li>
                     </ul>
                 </li>
-                <li class="pure-menu-item"><a href="{{pathFor 'logWellness'}}"       class="pure-menu-link" role="button">Log Wellness</a></li>
+                <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                  <a id="menuLink1" class="pure-menu-link">Wellness</a>
+                    <ul class="pure-menu-children">
+                      <li class="pure-menu-item"><a href="{{pathFor 'logWellness'}}" class="pure-menu-link">Log Wellness</a></li>
+                      <li class="pure-menu-item"><a href="{{pathFor 'manageWellness'}}" class="pure-menu-link">Manage Entries</a></li>
+                    </ul>
+                </li>
+                <!-- <li class="pure-menu-item"><a href="{{pathFor 'logWellness'}}"       class="pure-menu-link" role="button">Log Wellness</a></li> -->
             </ul>
 
 

@@ -28,6 +28,7 @@ Meteor.methods({
       energy: wellness.energy,
       stress: wellness.stress,
       upperSoreness: wellness.upperSoreness,
+      lowBackSoreness: wellness.lowBackSoreness,      
       lowerSoreness: wellness.lowerSoreness,
       dateTimeTaken: wellness.dateTimeTaken,
       comments: wellness.comments
@@ -90,6 +91,10 @@ var WellnessesSchema = new SimpleSchema({
   "upperSoreness": {
     type: Number,
     label: "Soreness of Upper Body"
+  },
+  "lowBackSoreness": {
+    type: Number,
+    label: "Soreness of Low Back"
   },
   "lowerSoreness": {
     type: Number,

@@ -31,7 +31,7 @@ Template.chart.onRendered(function() {
         dates.m1d[i] = sw.add(1, 'days').format("YYYY-MM-DD");
         dates.now[i] = moment(dates.m1d[i]).add(1, 'days'  ).format("YYYY-MM-DD");
        }
-       console.log(dates);
+       // console.log(dates);
        var dtVals = [];
        var ctVals = [];
 
@@ -47,13 +47,9 @@ Template.chart.onRendered(function() {
           ctVals[i] = ctVals[i] / 7;
         }
 
-       // const arr = {t:[],y:[]};
-       // dp.forEach(function (d,i) {
-       //   arr.t[i] = d.dateTimeCompleted;
-       //   arr.y[i] = d.effortImpulse;
-       // });
        allVals=[];
        alltVals=[];
+       
        for (var i=0; i < dp.length; i++) {
            allVals[i] = dp[i].effortImpulse;
            alltVals[i] = moment(dp[i].dateTimeCompleted).format("YYYY-MM-DD HH:mm");
@@ -66,9 +62,8 @@ Template.chart.onRendered(function() {
        });
 
 
-       const data1 = data.filter((i) => {return i.t > dates.now[0];});
-       console.log(dates.now);
-       // console.log(data1);
+   const data1 = data.filter((i) => {return i.t > dates.now[0];});
+
 
     // console.log(dtVals,ctVals,dates);
     const datadt = dates.now.map((t, i) => {
@@ -83,45 +78,6 @@ Template.chart.onRendered(function() {
         y: ctVals[i]
       };
     });
-    // console.log(datact);
-      //now we want a daily total
-    //   var start = new Date(year, month, day);
-    //   var end = new Date(year, month, day);
-    //
-    //   //Invoices with a 'date' field between the 'start' and 'end' dates
-    //   var cursor = CollectionName.find({ date : { $gte : start, $lt: end });
-    //   var taxTotal = 0;
-    //   var results = cursor.forEach(function(doc) {
-    //     //Adds the tax field of each document to the total
-    //   taxTotal += doc.tax;
-    // });
-
-
-       //   console.log(retVals);
-         // console.log(dp1);
-         // var data = [{"month":"January","name":"Alex","count":10},{"month":"February","name":"Alex","count":20},{"month":"February","name":"John","count":30},{"month":"February","name":"Mark","count":40},{"month":"March","name":"Alex","count":10},{"month":"March","name":"John","count":20}];
-         //
-         // // TO FIND UNIQUE ARRAY
-         // var months = data.map(function(t){ return t.month});
-         // uniqueMonths = months.filter(function(item, pos) {
-         //     return months.indexOf(item) == pos;
-         // });
-         // console.log('UNIQUE MONTHS:- '+uniqueMonths);
-         //
-         // var names = data.map(function(t){ return t.name});
-         // uniqueNames = names.filter(function(item, pos) {
-         //     return names.indexOf(item) == pos;
-         // });
-         // console.log('UNIQUE NAMES:- '+uniqueNames);
-         // var countArr = {};
-         // uniqueNames.forEach(function(d){
-         // 	var arr = [];
-         // 	uniqueMonths.forEach(function(k){
-         // 		arr.push(getValue(d,k));
-         // 	});
-         // 	countArr[d] = arr;
-         // });
-         // console.log('COUNT ARRAY:- '+JSON.stringify(countArr));
 
          // To get value from the array
          function getValue(name, month){
@@ -134,8 +90,6 @@ Template.chart.onRendered(function() {
          	return value;
          }
 
-         // console.log(value);
-         // console.log();
 
             var myChart = new Chart(ctx, {
            type: 'line',
@@ -148,33 +102,6 @@ Template.chart.onRendered(function() {
                     {data:datact,label:"Previous Week (Average)" //,borderColor: "#e8c3b9",backgroundColor: "#e8c3b9"
                     }]
 
-         // datasets: [{
-         //     data: [86,114,106,106,107,111,133,221,783,2478],
-         //     label: "Africa",
-         //     borderColor: "#3e95cd",
-         //     fill: false
-         //   }, {
-         //     data: [282,350,411,502,635,809,947,1402,3700,5267],
-         //     label: "Asia",
-         //     borderColor: "#8e5ea2",
-         //     fill: false
-         //   }, {
-         //     data: [168,170,178,190,203,276,408,547,675,734],
-         //     label: "Europe",
-         //     borderColor: "#3cba9f",
-         //     fill: false
-         //   }, {
-         //     data: [40,20,10,16,24,38,74,167,508,784],
-         //     label: "Latin America",
-         //     borderColor: "#e8c3b9",
-         //     fill: false
-         //   }, {
-         //     data: [6,3,2,2,7,26,82,172,312,433],
-         //     label: "North America",
-         //     borderColor: "#c45850",
-         //     fill: false
-         //   }
-         // ]
        },
        options: {
          legend: {
