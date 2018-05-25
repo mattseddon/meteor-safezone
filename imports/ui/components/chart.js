@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import Chart from 'chart.js';
 import moment from 'moment';
+//import { processMongo } from './chartWellness.js'
 
 import { Efforts } from '../../api/efforts.js';
 
@@ -49,7 +50,7 @@ Template.chart.onRendered(function() {
 
        allVals=[];
        alltVals=[];
-       
+
        for (var i=0; i < dp.length; i++) {
            allVals[i] = dp[i].effortImpulse;
            alltVals[i] = moment(dp[i].dateTimeCompleted).format("YYYY-MM-DD HH:mm");
