@@ -98,8 +98,8 @@ Template.chart.onRendered(function() {
        data: {
          // labels: impulses.date,
          labels: dates.now,
-         datasets: [{data:data1,label:"Individual Session"    ,borderColor: "#33C3F0",backgroundColor: "#33C3F0",fill: false},
-                    {data:datadt,label:"Previous Day (Total)"   ,borderColor: "#4CD964",backgroundColor: "#4CD964",fill: false},
+         datasets: [{lineTension: 0.2,data:data1,label:"Individual Session"    ,borderColor: "#33C3F0",backgroundColor: "#33C3F0",fill: false},
+                    {lineTension: 0.2,data:datadt,label:"Previous Day (Total)"   ,borderColor: "#4CD964",backgroundColor: "#4CD964",fill: false},
                     {data:datact,label:"Previous Week (Average)" //,borderColor: "#e8c3b9",backgroundColor: "#e8c3b9"
                     }]
 

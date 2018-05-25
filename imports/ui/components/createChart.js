@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const processMongo = function(dp,xids,dates){
+export const processMongo = function(dp,xids,dates,avgDT){
 
   function getKeys(d){
     var uniqueKeys = Object.keys(d.reduce(function(result, obj) {
@@ -44,25 +44,25 @@ export const processMongo = function(dp,xids,dates){
      ctVals[i]   = {};
      ctCnt[i]    = {};
 
-     for (var name in keys){
+     for (var k in keys){
 
-        dtVals[i][keys[name]] = 0;
-        dtCnt[i][keys[name]]  = 0;
-        ctVals[i][keys[name]] = 0;
-        ctCnt[i][keys[name]]  = 0;
+        dtVals[i][keys[k]] = 0;
+        dtCnt[i][keys[k]]  = 0;
+        ctVals[i][keys[k]] = 0;
+        ctCnt[i][keys[k]]  = 0;
 
         dp.forEach(function(d,j) {
 
           if (i==0){
 
-            if (name==0){
+            if (k==0){
             allVals[j] = {};
             alltVals[j] = moment(d.dateTimeTaken).format("YYYY-MM-DD HH:mm");
             };
 
-            allVals[j][keys[name]]  = d[keys[name]];
-            //console.log(keys.length,name);
-            if (name==keys.length-1){
+            allVals[j][keys[k]]  = d[keys[k]];
+            //console.log(keys.length,k);
+            if (k==keys.length-1){
               allVals[j]['overall'] = sumobj(allVals[j]) / cntobj(allVals[j]);
             };
 
@@ -70,18 +70,23 @@ export const processMongo = function(dp,xids,dates){
 
           if (   (dates.m1d[i] <= d.dateTimeTaken && d.dateTimeTaken < dates.now[i])
               || (dates.m1d[i] <= d.dateTimeTaken &&                 ! dates.now[i]))
-              { dtVals[i][keys[name]] += d[keys[name]];
-                dtCnt[i][keys[name]]  += 1;
+              { dtVals[i][keys[k]] += d[keys[k]];
+                dtCnt[i][keys[k]]  += 1;
               };
           if (   (dates.m1w[i] <= d.dateTimeTaken && d.dateTimeTaken < dates.now[i])
               || (dates.m1w[i] <= d.dateTimeTaken &&                 ! dates.now[i]))
-              { ctVals[i][keys[name]] += d[keys[name]];
-                ctCnt[i][keys[name]]  += 1;
+              { ctVals[i][keys[k]] += d[keys[k]];
+                ctCnt[i][keys[k]]  += 1;
               };
 
             });
-
-          ctVals[i][keys[name]] = ctVals[i][keys[name]] / ctCnt[i][keys[name]];
+          //for Impulse we want weekly average based on 7 days
+          if (avgDT){
+            ctVals[i][keys[k]] = ctVals[i][keys[k]] / 7;
+          }
+          else {
+            ctVals[i][keys[k]] = ctVals[i][keys[k]] / ctCnt[i][keys[k]];
+          };
      }
      dtVals[i]['overall'] = sumobj(dtVals[i])  / cntobj(dtVals[i]);
      ctVals[i]['overall'] = sumobj(ctVals[i])  / cntobj(ctVals[i]);
@@ -91,51 +96,45 @@ export const processMongo = function(dp,xids,dates){
   keys.push('overall');
 
   //data for each entry
-  dataEe = {};
-  for (var name in keys){
+  dataEE = {};
+  for (var k in keys){
 
-    dataEe[keys[name]] = [];
-    dataEe[keys[name]] = alltVals.map((t, i) => {
+    dataEE[keys[k]] = [];
+    dataEE[keys[k]] = alltVals.map((t, i) => {
       return {
         t: t,
-        y: Number(allVals[i][keys[name]].toFixed(2))
+        y: Number(allVals[i][keys[k]].toFixed(2))
       };
     }).filter((i) => {return i.t > dates.now[0];});
   }
-  // const dataEe = alltVals.map((t, i) => {
-  //   return {
-  //     t: t,
-  //     y: Number(allVals[i]['overall'].toFixed(2))
-  //   };
-  // }).filter((i) => {return i.t > dates.now[0];});
 
   //data for daily totals
-  dataDt = {};
-  for (var name in keys){
+  dataDT = {};
+  for (var k in keys){
 
-    dataDt[keys[name]] = [];
-    dataDt[keys[name]] = dates.now.map((t, i) => {
+    dataDT[keys[k]] = [];
+    dataDT[keys[k]] = dates.now.map((t, i) => {
       return {
         t: t,
-        y: Number(dtVals[i][keys[name]].toFixed(2))
+        y: Number(dtVals[i][keys[k]].toFixed(2))
       };
     });
   }
 
-  //data for weekly totals
-  dataWt = {};
-  for (var name in keys){
+  //data for weekly average
+  dataWA = {};
+  for (var k in keys){
 
-    dataWt[keys[name]] = [];
-    dataWt[keys[name]] = dates.now.map((t, i) => {
+    dataWA[keys[k]] = [];
+    dataWA[keys[k]] = dates.now.map((t, i) => {
       return {
         t: t,
-        y: Number(ctVals[i][keys[name]].toFixed(2))
+        y: Number(ctVals[i][keys[k]].toFixed(2))
       };
     });
   }
 
-  return [dataEe, dataDt, dataWt];
+  return [dataEE, dataDT, dataWA];
 }
 
  export const createChart = function(xValues,chartId,datasets,title,yMax,yTitle){
@@ -161,20 +160,23 @@ export const processMongo = function(dp,xids,dates){
       scales: {
         xAxes: [{
          // ticks:{display: false},
+         // gridLines: {
+         //           display:false
+         //       },
          type: 'time',
          time: {
            unit: 'day',
-           // displayFormats: {
-           //  'millisecond': 'DD MMM',
-           //   'second': 'DD MMM',
-           //   'minute': 'DD MMM',
-           //   'hour': 'DD MMM',
-           //   'day': 'DD MMM',
-           //   'week': 'DD MMM',
-           //   'month': 'DD MMM',
-           //   'quarter': 'DD MMM',
-           //   'year': 'DD MMM',
-           // }
+           displayFormats: {
+            'millisecond': 'DD MMM',
+             'second': 'DD MMM',
+             'minute': 'DD MMM',
+             'hour': 'DD MMM',
+             'day': 'DD MMM',
+             'week': 'DD MMM',
+             'month': 'DD MMM',
+             'quarter': 'DD MMM',
+             'year': 'DD MMM',
+           }
          }
         }],
         yAxes: [{
@@ -191,7 +193,8 @@ export const processMongo = function(dp,xids,dates){
                 return label;
               }
             },
-            max: yMax
+            max: yMax,
+            stepSize: 1
             // console.log(ytickops);
           }
         }]
