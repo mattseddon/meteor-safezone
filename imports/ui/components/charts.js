@@ -107,16 +107,16 @@ Template.charts.onRendered(function() {
 
       var impulseChart = createChart(dates.now,"impulseChart",impulseCD,"Effort",eMax,"Impulse (RPE * Duration)");
 
-      var durationCD = [{data:eDataEE['effortDuration'],label:"Duration (Session)"     ,borderColor:"#4A3900",backgroundColor:"#4A3900",fill: false},
-                        {data:eDataDT['effortDuration'],label:"Total Duration (Day)"   ,borderColor:"#F7C700",backgroundColor:"#F7C700",fill: false},
-                        {data:eDataWA['effortDuration'],label:"Average Duration (Week)",borderColor:"#AE8A01",backgroundColor:"#8B6E01" }];
+      var durationCD = [{data:eDataEE['effortDuration'],label:"Duration (Session)"     ,borderColor:"#1DF6C7",backgroundColor:"#1DF6C7",fill: false},
+                        {data:eDataDT['effortDuration'],label:"Total Duration (Day)"   ,borderColor:"#00221B",backgroundColor:"#00221B",fill: false},
+                        {data:eDataWA['effortDuration'],label:"Average Duration (Week)",borderColor:"#059A7E",backgroundColor:"#006F5B" }];
 
       var duartionChart = createChart(dates.now,"durationChart",durationCD,"Duration",dMax,"Minutes");
 
-      var RPECD = [{data:eDataEE['effortRPE'],label:"RPE (Session)"     ,borderColor:"#4A3900",backgroundColor:"#4A3900",fill: false},
-                   {data:eDataWA['effortRPE'],label:"Average RPE (Week)",borderColor:"#AE8A01",backgroundColor:"#8B6E01" }];
+      var RPECD = [{data:eDataEE['effortRPE'],label:"RPE (Session)"     ,borderColor:"#EEFF5F",backgroundColor:"#EEFF5F",fill: false},
+                   {data:eDataWA['effortRPE'],label:"Average RPE (Week)",borderColor:"#969F38",backgroundColor:"#6C7226" }];
 
-      var RPEChart = createChart(dates.now,"RPEChart",RPECD,"RPE",10,"Rating");
+      var RPEChart = createChart(dates.now,"RPEChart",RPECD,"Rate of Percieved Exertion (RPE)",10,"Rating");
 
 
 

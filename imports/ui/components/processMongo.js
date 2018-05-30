@@ -76,19 +76,19 @@ export const processMongo = function(dp,xids,dates,dateVar,ef){
           };
 
           if (   (dates.m1d[i] <= d[dateVar] && d[dateVar] < dates.now[i])
-              || (dates.m1d[i] <= d[dateVar] &&                 ! dates.now[i]))
+              || (dates.m1d[i] <= d[dateVar] &&            ! dates.now[i]))
               { dtVals[i][keys[k]] += d[keys[k]];
                 dtCnt[i][keys[k]]  += 1;
               };
           if (   (dates.m1w[i] <= d[dateVar] && d[dateVar] < dates.now[i])
-              || (dates.m1w[i] <= d[dateVar] &&                 ! dates.now[i]))
+              || (dates.m1w[i] <= d[dateVar] &&            ! dates.now[i]))
               { ctVals[i][keys[k]] += d[keys[k]];
                 ctCnt[i][keys[k]]  += 1;
               };
 
             });
           //for Impulse we want weekly average based on 7 days
-          if (ef){
+          if (ef && keys[k] != 'effortRPE'){
             ctVals[i][keys[k]] = ctVals[i][keys[k]] / 7;
           }
           else {

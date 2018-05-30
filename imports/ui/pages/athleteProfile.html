@@ -1,7 +1,7 @@
 <template name='athleteProfile'>
   <body>
     <div class="container">
-      <header>
+      <!-- <header> -->
       <!-- <h1>Todo List ({{incompleteCount}})</h1>
 
       <label class="hide-completed">
@@ -9,14 +9,14 @@
         Hide Completed Tasks
       </label> -->
 
-        {{> loginButtons}}
+        <!-- {{> loginButtons}} -->
 
       <!-- {{#if currentUser}}
         <form class="new-task">
           <input type="text" name="text" placeholder="Type to add new tasks" />
         </form>
       {{/if}} -->
-      </header>
+      <!-- </header> -->
 
       {{#with athlete}}
       <h2 style="text-align:center;">{{name}}</h2>
@@ -26,12 +26,12 @@
 
       {{> charts}}
 
-      <h4 style="text-align:center;margin-top:40px;">Last 5 Efforts:</h4>
+      <!-- <h4 style="text-align:center;margin-top:40px;">Last 5 Efforts:</h4>
       <p style="text-align:center;">
         {{#each effort}}
           {{dateTimeCompleted}}: RPE <strong>{{effortRPE}}</strong> for <strong>{{effortDuration}}</strong> minutes = An impulse of <strong>{{effortImpulse}}</strong><br>
         {{/each}}
-      </p>
+      </p> -->
 
       <div class="row text-center" style="margin-top:20px;">
         {{#if showUpdateInfo}}
