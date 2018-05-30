@@ -9,3 +9,13 @@ import './custNavBar.html';
 //         // self.subscribe('singlePost', id); // Subscribe to the single entry in the collection with the route params id
 //     });
 // });
+
+Template.custNavBar.events({
+
+"click #nav-logout": function(event) {
+        event.preventDefault();
+        Meteor.logout();
+        Bert.alert('Logged out!', 'success');
+},
+
+});

@@ -1,7 +1,6 @@
 import './athleteInfo.html';
 import '../../api/athletes.js';
 
-
 Template.athleteInfo.helpers({
   isProfile: function( location ) {
     return Template.instance().data.context === "profile" ? true : false;
@@ -11,11 +10,11 @@ Template.athleteInfo.helpers({
   },
   lineups: function(){
     return Meteor.settings.public.lineups;
-  }
+  },
 });
 
 Template.athleteInfo.events({
-  'click input[type="submit"]': function( event, template ) {
+  'click #updateInfo': function( event, template ) {
       event.preventDefault();
 
       var athlete = {
@@ -35,5 +34,8 @@ Template.athleteInfo.events({
           Bert.alert( "Athlete information updated!", "success" );
         }
       });
-    }
+    },
+
+
+
   });

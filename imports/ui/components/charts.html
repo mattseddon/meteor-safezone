@@ -1,0 +1,42 @@
+<!-- All charts need to be in one template so they can all be rendered with the same data from the JS -->
+<template name="charts">
+  <div class="row">
+    <canvas id="impulseVsWellness" width="20" height="12" style="display: block; margin-top:20px;"></canvas>
+  </div>
+  <div class="row" ><!--style="width:50%;"-->
+    <canvas id="impulseChart" width="20" height="12" style="display: block; margin-top:40px;"></canvas>
+  </div>
+  <div class="row" ><!--style="width:50%;"-->
+    <canvas id="wellnessChart" width="20" height="12" style="display: block; margin-top:40px;"></canvas>
+  </div>
+
+  <div class="row text-center" style="margin-top:20px;">
+    {{#if showDE}}
+      <input id="hideDE" type="submit" class="button button-secondary" value="Hide Detailed Effort" style="font-size:10px;">
+    {{else}}
+      <input id="showDE" type="submit" class="button button-secondary" value="Show Detailed Effort" style="font-size:10px;">
+    {{/if}}
+    {{#if showDW}}
+      <input id="hideDW" type="submit" class="button button-secondary" value="Hide Detailed Wellness">
+    {{else}}
+      <input id="showDW" type="submit" class="button button-secondary" value="Show Detailed Wellness">
+    {{/if}}
+  </div>
+  <!-- smart toggle for detailed wellness -->
+  <div class="smartToggleDE" data-collapsed='true' style="height:0px;">
+    <div class="container" style="overflow: visible;">
+      <canvas id="durationChart" width="20" height="12" style="display: block; margin-top:40px;"></canvas>
+      <canvas id="RPEChart"      width="20" height="12" style="display: block; margin-top:40px;"></canvas>
+    </div>
+  </div>
+
+  <!-- smart toggle for detailed wellness -->
+  <div class="smartToggleDW" data-collapsed='true' style="height:0px;">
+    <div class="container" style="overflow: visible;">
+      <canvas id="sleepChart"    width="20" height="12" style="display: block; margin-top:40px;"></canvas>
+      <canvas id="physicalChart" width="20" height="12" style="display: block; margin-top:40px;"></canvas>
+      <canvas id="mentalChart"   width="20" height="12" style="display: block; margin-top:40px;"></canvas>
+    </div>
+  </div>
+
+</template>
