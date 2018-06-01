@@ -32,7 +32,8 @@ Chart.defaults.global.elements.line.borderWidth  = 1.5;
 Chart.defaults.global.elements.line.tension      = 0.2;
 Chart.defaults.global.elements.point.radius      = 2;
 Chart.defaults.global.elements.point.hoverRadius = 2.5;
-
+Chart.defaults.global.animation.duration         = 2000;
+Chart.defaults.global.animation.easing = 'easeInCubic';
 
 Template.charts.onRendered(function() {
   subWellness= Meteor.subscribe('wellnesses');
@@ -62,11 +63,11 @@ Template.charts.onRendered(function() {
                                                                                     ,'dateTimeCompleted' :1 },sort: {dateTimeCompleted: 1}}).fetch();
 
       //cannot move this up as tr is need for data collection
-      var dates = {now:[],m1d:[],m1w:[]};
+      self.dates = {now:[],m1d:[],m1w:[]};
       for(var i=0; i<=14; i++){
-        dates.m1w[i] = tr.add(1, 'days').format("YYYY-MM-DD");
-        dates.m1d[i] = sw.add(1, 'days').format("YYYY-MM-DD");
-        dates.now[i] = moment(dates.m1d[i]).add(1, 'days'  ).format("YYYY-MM-DD");
+        self.dates.m1w[i] = tr.add(1, 'days').format("YYYY-MM-DD");
+        self.dates.m1d[i] = sw.add(1, 'days').format("YYYY-MM-DD");
+        self.dates.now[i] = moment(dates.m1d[i]).add(1, 'days'  ).format("YYYY-MM-DD");
       }
 
       // var xids = ;
@@ -87,78 +88,72 @@ Template.charts.onRendered(function() {
 
       /*add 5% to the max value for impulses for charting purposes*/
       if (eDataDT['effortImpulse']) {
-      var eMax = Math.ceil(Math.max.apply(Math,eDataDT['effortImpulse' ].map(function(o){return o.y;}))*1.05/100)*100;
-      var dMax = Math.ceil(Math.max.apply(Math,eDataDT['effortDuration'].map(function(o){return o.y;}))*1.05/100)*100;
+      self.eMax = Math.ceil(Math.max.apply(Math,eDataDT['effortImpulse' ].map(function(o){return o.y;}))*1.05/100)*100;
+      self.dMax = Math.ceil(Math.max.apply(Math,eDataDT['effortDuration'].map(function(o){return o.y;}))*1.05/100)*100;
       }
       // console.log(eMax);
 
-      var impulseVsWellnessCD = [ {data:eDataDT['effortImpulse'],borderColor:"#F7C700",backgroundColor:"#F7C700",fill:false,label:'Total Effort (Day)'   ,yAxisID: 'yLeft' }
-                                 ,{data:wDataEE['overall'      ],borderColor:"#09D483",backgroundColor:"#09D483",fill:false,label:'Wellness (Day)'       ,yAxisID: 'yRight'}
-                                 ,{data:eDataWA['effortImpulse'],borderColor:"#AE8A01",backgroundColor:"#8B6E01"           ,label:"Average Effort (Week)",yAxisID: 'yLeft' }
-                                 ,{data:wDataWA['overall'      ],borderColor:"#06AD6A",backgroundColor:"#048852"           ,label:"Wellness (Week)"      ,yAxisID: 'yRight'}];
-
-                          // (xValues,chartId,datasets,title,yLMax,yLTitle,yLStepSize,yRMax,yRTitle,yRStepSize)
-      var impulseVsWellnessChart = create2yAxisChart(dates.now,"impulseVsWellness",impulseVsWellnessCD,"Effort vs Wellness",eMax,"Impulse (RPE * Duration)",null ,5.2,"Score",null);
-
-
-      var impulseCD = [{data:eDataEE['effortImpulse'],label:"Effort (Session)"     ,borderColor:"#4A3900",backgroundColor:"#4A3900",fill: false},
-                       {data:eDataDT['effortImpulse'],label:"Total Effort (Day)"   ,borderColor:"#F7C700",backgroundColor:"#F7C700",fill: false},
-                       {data:eDataWA['effortImpulse'],label:"Average Effort (Week)",borderColor:"#AE8A01",backgroundColor:"#8B6E01" }];
-
-      var impulseChart = createChart(dates.now,"impulseChart",impulseCD,"Effort",eMax,"Impulse (RPE * Duration)");
-
-      var durationCD = [{data:eDataEE['effortDuration'],label:"Duration (Session)"     ,borderColor:"#1DF6C7",backgroundColor:"#1DF6C7",fill: false},
+      self.durationCD = [{data:eDataEE['effortDuration'],label:"Duration (Session)"     ,borderColor:"#1DF6C7",backgroundColor:"#1DF6C7",fill: false},
                         {data:eDataDT['effortDuration'],label:"Total Duration (Day)"   ,borderColor:"#00221B",backgroundColor:"#00221B",fill: false},
                         {data:eDataWA['effortDuration'],label:"Average Duration (Week)",borderColor:"#059A7E",backgroundColor:"#006F5B" }];
 
-      var duartionChart = createChart(dates.now,"durationChart",durationCD,"Duration",dMax,"Minutes");
-
-      var RPECD = [{data:eDataEE['effortRPE'],label:"RPE (Session)"     ,borderColor:"#EEFF5F",backgroundColor:"#EEFF5F",fill: false},
-                   {data:eDataWA['effortRPE'],label:"Average RPE (Week)",borderColor:"#969F38",backgroundColor:"#6C7226" }];
-
-      var RPEChart = createChart(dates.now,"RPEChart",RPECD,"Rate of Percieved Exertion (RPE)",10,"Rating");
+      self.durationChart = createChart(dates.now,"durationChart",durationCD,"Duration",dMax,"Minutes");
 
 
+      self.RPECD = [{data:eDataEE['effortRPE'],label:"RPE (Session)"     ,borderColor:"#1F1C16",backgroundColor:"#1F1C16",fill: false},
+                   {data:eDataWA['effortRPE'],label:"Average RPE (Week)",borderColor:"#433E33",backgroundColor:"#6C6454" }];
 
-      var wellnessCD = [ {data:wDataEE['overall'  ],borderColor:"#09D483",backgroundColor:"#09D483",fill:false,label:'Wellness (Day)' },
+      self.RPEChart = createChart(dates.now,"RPEChart",RPECD,"Rate of Percieved Exertion (RPE)",10,"Rating");
+
+
+      self.mentalCD = [{data:wDataEE['mood'  ],borderColor:"#F3A319",backgroundColor:"#F3A319",fill:false,label:"Mood (Day)"   },
+                       {data:wDataEE['stress'],borderColor:"#482F01",backgroundColor:"#482F01",fill:false,label:"Stress (Day)" },
+                       {data:wDataWA['mental'],borderColor:"#AA720D",backgroundColor:"#885B08"           ,label:'Mental (Week)'} ];
+
+      self.mentalChart = createChart(dates.now,"mentalChart",mentalCD,"Mental",5.4,"Score");
+
+
+      self.sleepCD =  [  {data:wDataEE['sleepQuality'],borderColor:"#33C3F0",backgroundColor:"#33C3F0",fill:false,label:'Quality (Day)',yAxisID: 'yLeft' }
+                       ,{data:wDataEE['sleepLength' ],borderColor:"#0B2336",backgroundColor:"#0B2336",fill:false,label:'Length (Day)' ,yAxisID: 'yRight'}
+                       ,{data:wDataWA['sleep'       ],borderColor:"#3673A8",backgroundColor:"#27577F"           ,label:"Sleep (Week)" ,yAxisID: 'yLeft' }];
+
+                          // (xValues,chartId,datasets,title,yLMax,yLTitle,yLStepSize,yRMax,yRTitle,yRStepSize)
+      self.sleepChart = create2yAxisChart(dates.now,"sleepChart",sleepCD,"Sleep",5.2,"Score",1,14,"Hours",);
+
+
+      self.physicalCD = [{data:wDataEE['upperSoreness'  ],borderColor:"#370D13",backgroundColor:"#370D13",fill:false,label:"Upper Body (Day)"},
+                         {data:wDataEE['lowBackSoreness'],borderColor:"#802A34",backgroundColor:"#802A34",fill:false,label:"Low Back (Day)"  },
+                         {data:wDataEE['lowerSoreness'  ],borderColor:"#D14A58",backgroundColor:"#D14A58",fill:false,label:"Lower Body (Day)"},
+                         {data:wDataEE['energy'         ],borderColor:"#F3A319",backgroundColor:"#F3A319",fill:false,label:"Energy (Day)"    },
+                         {data:wDataWA['physical'       ],borderColor:"#A83A45",backgroundColor:"#5A1B23"           ,label:'Physical (Week)' } ];
+
+                          // (xValues,chartId,datasets,title,yLMax,yLTitle,yLStepSize,yRMax,yRTitle,yRStepSize)
+      self.physicalChart = createChart(dates.now,"physicalChart",physicalCD,"Physical",5.2,"Score");
+
+      //these charts need to be created last so that they will render on screen
+      self.impulseCD = [{data:eDataEE['effortImpulse'],label:"Effort (Session)"     ,borderColor:"#4A3900",backgroundColor:"#4A3900",fill: false},
+                        {data:eDataDT['effortImpulse'],label:"Total Effort (Day)"   ,borderColor:"#F7C700",backgroundColor:"#F7C700",fill: false},
+                        {data:eDataWA['effortImpulse'],label:"Average Effort (Week)",borderColor:"#AE8A01",backgroundColor:"#8B6E01" }];
+
+
+      self.impulseChart = createChart(dates.now,"impulseChart",impulseCD,"Effort",eMax,"Impulse (RPE * Duration)");
+
+
+      self.wellnessCD = [ {data:wDataEE['overall'  ],borderColor:"#09D483",backgroundColor:"#09D483",fill:false,label:'Wellness (Day)' },
                          {data:wDataEE['sleep'    ],borderColor:"#59AFFE",backgroundColor:"#59AFFE",fill:false,label:'Sleep (Day)'    },
                          {data:wDataEE['physical' ],borderColor:"#FC5B6B",backgroundColor:"#FC5B6B",fill:false,label:'Physical (Day)' },
                          {data:wDataEE['mental'   ],borderColor:"#F3A319",backgroundColor:"#F3A319",fill:false,label:'Mental (Day)'   },
                          {data:wDataWA['overall'  ],borderColor:"#06AD6A",backgroundColor:"#048852"           ,label:"Wellness (Week)"}];//,borderColor: "#e8c3b9",backgroundColor: "#e8c3b9"
 
+      self.wellnessChart = createChart(dates.now,"wellnessChart",wellnessCD,"Wellness",5.2,"Score");
 
-      var wellnessChart = createChart(dates.now,"wellnessChart",wellnessCD,"Wellness",5.2,"Score");
-
-
-      var mentalCD = [ {data:wDataEE['mood'  ],borderColor:"#F3A319",backgroundColor:"#F3A319",fill:false,label:"Mood (Day)"   },
-                       {data:wDataEE['stress'],borderColor:"#482F01",backgroundColor:"#482F01",fill:false,label:"Stress (Day)" },
-                       {data:wDataWA['mental'],borderColor:"#AA720D",backgroundColor:"#885B08"           ,label:'Mental (Week)'} ];
-
-      var mentalChart = createChart(dates.now,"mentalChart",mentalCD,"Mental",5.4,"Score");
-
-
-      // var datasets2 = [ {data:wDataEE['upperSoreness'  ],label:"Upper Body" ,borderColor: "#FF9500",backgroundColor: "#FF9500",fill: false},
-      //                   {data:wDataEE['lowBackSoreness'],label:"Low Back"   ,borderColor: "#4CD964",backgroundColor: "#4CD964",fill: false},
-      //                   {data:wDataEE['lowerSoreness'  ],label:"Lower Body" ,borderColor: "#33C3F0",backgroundColor: "#33C3F0",fill: false},
-      //                   {data:wDataWA['overall'],label:"Previous Week (Average)"}
-      //                 ];
-
-      var sleepCD =  [  {data:wDataEE['sleepQuality'],borderColor:"#33C3F0",backgroundColor:"#33C3F0",fill:false,label:'Quality (Day)',yAxisID: 'yLeft' }
-                       ,{data:wDataEE['sleepLength' ],borderColor:"#0B2336",backgroundColor:"#0B2336",fill:false,label:'Length (Day)' ,yAxisID: 'yRight'}
-                       ,{data:wDataWA['sleep'       ],borderColor:"#3673A8",backgroundColor:"#27577F"           ,label:"Sleep (Week)" ,yAxisID: 'yLeft' }];
+      self.impulseVsWellnessCD = [{data:eDataDT['effortImpulse'],borderColor:"#F7C700",backgroundColor:"#F7C700",fill:false,label:'Total Effort (Day)'   ,yAxisID: 'yLeft' },
+                                  {data:wDataEE['overall'      ],borderColor:"#09D483",backgroundColor:"#09D483",fill:false,label:'Wellness (Day)'       ,yAxisID: 'yRight'},
+                                  {data:eDataWA['effortImpulse'],borderColor:"#AE8A01",backgroundColor:"#8B6E01"           ,label:"Average Effort (Week)",yAxisID: 'yLeft' },
+                                  {data:wDataWA['overall'      ],borderColor:"#06AD6A",backgroundColor:"#048852"           ,label:"Wellness (Week)"      ,yAxisID: 'yRight'} ];
 
                           // (xValues,chartId,datasets,title,yLMax,yLTitle,yLStepSize,yRMax,yRTitle,yRStepSize)
-      var sleepChart = create2yAxisChart(dates.now,"sleepChart",sleepCD,"Sleep",5.2,"Score",1,14,"Hours",);
-
-
-      var physicalCD = [{data:wDataEE['upperSoreness'  ],borderColor:"#370D13",backgroundColor:"#370D13",fill:false,label:"Upper Body (Day)"},
-                        {data:wDataEE['lowBackSoreness'],borderColor:"#802A34",backgroundColor:"#802A34",fill:false,label:"Low Back (Day)"  },
-                        {data:wDataEE['lowerSoreness'  ],borderColor:"#D14A58",backgroundColor:"#fff",fill:false,label:"Lower Body (Day)"},
-                        {data:wDataEE['energy'         ],borderColor:"#FC5B6B",backgroundColor:"#FC5B6B",fill:false,label:"Energy (Day)"    },
-                        {data:wDataWA['physical'       ],borderColor:"#A83A45",backgroundColor:"#5A1B23"           ,label:'Physical (Week)' } ];
-
-                          // (xValues,chartId,datasets,title,yLMax,yLTitle,yLStepSize,yRMax,yRTitle,yRStepSize)
-      var physicalChart = createChart(dates.now,"physicalChart",physicalCD,"Physical",5.2,"Score");
+      self.impulseVsWellnessChart = create2yAxisChart(dates.now,"impulseVsWellness",impulseVsWellnessCD,"Effort vs Wellness",eMax,"Impulse (RPE * Duration)",null ,5.2,"Score",null);
 
     }
   });
@@ -171,6 +166,9 @@ Template.charts.events({
        event.preventDefault();
        Session.set('showDE', true);
        toggleSection(template.find("[class='smartToggleDE']"));
+       createChart(dates.now,"RPEChart",RPECD,"Rate of Percieved Exertion (RPE)",10,"Rating");
+       createChart(dates.now,"durationChart",durationCD,"Duration",dMax,"Minutes");
+
      },
 
   'click #hideDE'(event,template) {
@@ -183,6 +181,9 @@ Template.charts.events({
        event.preventDefault();
        Session.set('showDW', true);
        toggleSection(template.find("[class='smartToggleDW']"));
+       createChart(dates.now,"physicalChart",physicalCD,"Physical",5.2,"Score");
+       create2yAxisChart(dates.now,"sleepChart",sleepCD,"Sleep",5.2,"Score",1,14,"Hours",);
+       createChart(dates.now,"mentalChart",mentalCD,"Mental",5.4,"Score");
      },
 
   'click #hideDW'(event,template) {

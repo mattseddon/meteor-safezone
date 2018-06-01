@@ -10,6 +10,7 @@ export const createChart = function(xValues,chartId,datasets,title,yMax,yTitle){
 
     },
     options: {
+      // responsiveAnimationDuration: 2000,
       legend: {
         display: true,
         position: 'bottom',
@@ -51,11 +52,13 @@ export const createChart = function(xValues,chartId,datasets,title,yMax,yTitle){
             labelString: yTitle,
           },
           ticks: {
+            autoSkip: true,
+            autoSkipPadding: 20,
             beginAtZero: true,
             fontSize:10,
             userCallback: function(label, index, labels) {
               // when the floored value is the same as the value we have a whole number
-              if (Math.floor(label) === label) {
+              if (Math.floor(label) === label && index != 0) {
                 return label;
               }
             },
@@ -67,17 +70,21 @@ export const createChart = function(xValues,chartId,datasets,title,yMax,yTitle){
       }
     }
   });
+  return anotherChart;
 }
 
 export const create2yAxisChart = function(xValues,chartId,datasets,title,yLMax,yLTitle,yLStepSize,yRMax,yRTitle,yRStepSize){
   var ctx = document.getElementById(chartId);
+
   var anotherChart = new Chart(ctx, {
+      responsive: true,
       type: 'line',
       data: {
           datasets: datasets,
           labels: xValues
       },
       options: {
+          // responsiveAnimationDuration: 2000,
           legend: {
             display: true,
             position: 'bottom',
@@ -116,17 +123,19 @@ export const create2yAxisChart = function(xValues,chartId,datasets,title,yLMax,y
                   labelString: yLTitle,
                 },
                 ticks: {
+                  autoSkip: true,
+                  // maxTicksLimit:6,
                   beginAtZero: true,
                   fontSize:10,
                   userCallback: function(label, index, labels) {
-                    // when the floored value is the same as the value we have a whole number
-                    if (Math.floor(label) === label) {
+                    if (Math.floor(label) === label && index != 0) {
                       return label;
                     }
                   },
                   max: yLMax,
                   // stepSize: yLStepSize
-                  suggestedMax: 5
+                  // suggestedMax: 5
+                  // maxTicksLimit: 6
                 }
             }, {
                 id: 'yRight',
@@ -140,20 +149,24 @@ export const create2yAxisChart = function(xValues,chartId,datasets,title,yLMax,y
                   labelString: yRTitle,
                 },
                 ticks: {
+                  autoSkip: true,
+                  // maxTicksLimit:6,
                   display:true,
                   beginAtZero: true,
                   fontSize:10,
                   userCallback: function(label, index, labels) {
                     // when the floored value is the same as the value we have a whole number
-                    if (Math.floor(label) === label) {
+                    if (Math.floor(label) === label  && index != 0) {
                       return label;
                     }
                   },
                   max: yRMax,
+                  // maxTicksLimit: 6
                   // stepSize: yRStepSize
                 }
             }]
           }
       }
   });
+  return anotherChart;
 }

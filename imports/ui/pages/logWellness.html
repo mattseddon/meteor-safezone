@@ -1,7 +1,6 @@
 <template name="logWellness">
   <div class="container">
 
-
     <div class="row text-center" style="margin-top:20px;">
       {{#if showInstructions}}
         <input id="hideInstructions" type="submit" class="button button-secondary" value="Hide instructions">
@@ -16,18 +15,24 @@
     </div>
 
     <div class="smartToggleInstr" data-collapsed='true' style="height:0px;text-align:center;">
-      <!-- <div class="container" style="text-align:center;"> -->
-        <p style="text-align:left;display: inline-block;">
-          <strong>Sleep Quality.       </strong>How was the quality of your sleep last night?<br>
-          <strong>Sleep Length.        </strong>How long did you sleep last night? Measured to the nearest hour.<br>
-          <strong>Mood.                </strong>How is your mood?<br>
-          <strong>Energy.              </strong>How are your energy levels?<br>
-          <strong>Stress.              </strong>How are your stress levels?<br>
-          <strong>Soreness: Upper Body. </strong>How is the soreness in your upper body?  No soreness is excellent.<br>
-          <strong>Soreness: Low Back.   </strong>How is the soreness in your low back?  No soreness is excellent.<br>
-          <strong>Soreness: Lower Body. </strong>How is the soreness in of your lower body?  No soreness is excellent.<br>
-        </p>
-      <!-- </div> -->
+     <p style="text-align:left;display: inline-block;">
+       The more consistent you can be with your entries the better.<br>
+       You should try to log a questionnaire at least once a day at a consistent time.<br>
+       You can log as many entries per day as you wish.  E.g one entry prior to exercise, one directly after, one before going to bed.<br>
+       If you are unsure as to how to answer the wellness questionnaire then please consult the answer key.<br>
+       It is a good idea to check the answer key at least once a week as you may forget the specified levels.
+     </p>
+      <p style="text-align:left;display: inline-block;">
+        <strong>Definitions:         </strong><br>
+        <strong>Sleep Quality.       </strong>How was the quality of your sleep last night?<br>
+        <strong>Sleep Length.        </strong>How long did you sleep last night? Measured to the nearest hour.<br>
+        <strong>Mood.                </strong>How is your mood?<br>
+        <strong>Energy.              </strong>How are your energy levels?<br>
+        <strong>Stress.              </strong>How are your stress levels?<br>
+        <strong>Soreness: Upper Body. </strong>How is the soreness in your upper body?  No soreness is excellent.<br>
+        <strong>Soreness: Low Back.   </strong>How is the soreness in your low back?  No soreness is excellent.<br>
+        <strong>Soreness: Lower Body. </strong>How is the soreness in of your lower body?  No soreness is excellent.<br>
+      </p>
     </div>
 
     <div class="smartToggleKey" data-collapsed='true' style="color:#fff; height:0px; font-size:14px;text-align:center;">
@@ -100,7 +105,7 @@
         </div>
       </div>
       <div class="submit-row text-center" style="margin-top: 20px;">
-        <input type="submit" class="button button-secondary" value="Log wellness">
+        <input type="submit" class="button button-primary" value="Log wellness">
       </div>
     </form>
 

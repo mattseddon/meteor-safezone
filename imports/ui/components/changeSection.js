@@ -54,5 +54,4 @@ var isCollapsed = section.getAttribute('data-collapsed') === 'true';
     collapseSection(section)
   }
 
-    console.log(section);
 }

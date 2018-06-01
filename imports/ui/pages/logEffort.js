@@ -5,6 +5,7 @@ import '../components/dateTimePicker.js';
 // import { Athletes } from '../../api/athletes.js';
 import {  Efforts    } from '../../api/efforts.js';
 import { placeEffort } from  '../../api/efforts.js';
+import { collapseSection ,expandSection ,toggleSection } from '../components/changeSection.js'
 
 import './logEffort.html';
 
@@ -22,19 +23,32 @@ Template.logEffort.helpers({
   effortTypes: function(){
     return Meteor.settings.public.effortTypes;
   },
+
   athleteStatuses: function(){
     return Meteor.settings.public.athleteStatuses;
   },
+
   calcImpulse: function () {
     if (Session.get('calcImpulse')) {
     return Session.get('calcImpulse');
     }
     else {return 360;}
-  }
+  },
+
+  showKeyScale() {
+    return Session.get('showKeyScale');
+  },
+  showInstructions() {
+    return Session.get('showInstructions');
+  },
+
 });
 
+
  Template.logEffort.onCreated(function(){
-   delete Session.keys['calcImpulse'];
+   Session.set('calcImpulse'     , 360  );
+   Session.set('showKeyScale'    , false);
+   Session.set('showInstructions', false);
 });
 // Template.impulses.onCreated(function bodyOnCreated() {
 //   this.state = new ReactiveDict();
@@ -137,4 +151,29 @@ Template.logEffort.events({
            });
 
   },
+
+  'click #showKeyScale'(event,template) {
+       event.preventDefault();
+       Session.set('showKeyScale', true);
+       toggleSection(template.find("[class='smartToggleKey']"));
+     },
+
+  'click #hideKeyScale'(event,template) {
+       event.preventDefault();
+       Session.set('showKeyScale', false);
+       toggleSection(template.find("[class='smartToggleKey']"));
+     },
+
+     'click #showInstructions'(event,template) {
+          event.preventDefault();
+          Session.set('showInstructions', true);
+          toggleSection(template.find("[class='smartToggleInstr']"));
+        },
+
+     'click #hideInstructions'(event,template) {
+          event.preventDefault();
+          Session.set('showInstructions', false);
+          toggleSection(template.find("[class='smartToggleInstr']"));
+        },
+
 });

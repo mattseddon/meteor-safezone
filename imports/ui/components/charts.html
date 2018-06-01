@@ -1,28 +1,11 @@
 <!-- All charts need to be in one template so they can all be rendered with the same data from the JS -->
 <template name="charts">
-  <div class="row">
+  <div class="container" style="overflow: visible;">
+    <canvas id="wellnessChart"     width="20" height="12" style="display: block; margin-top:40px;"></canvas>    
     <canvas id="impulseVsWellness" width="20" height="12" style="display: block; margin-top:20px;"></canvas>
-  </div>
-  <div class="row" ><!--style="width:50%;"-->
-    <canvas id="impulseChart" width="20" height="12" style="display: block; margin-top:40px;"></canvas>
-  </div>
-  <div class="row" ><!--style="width:50%;"-->
-    <canvas id="wellnessChart" width="20" height="12" style="display: block; margin-top:40px;"></canvas>
+    <canvas id="impulseChart"      width="20" height="12" style="display: block; margin-top:40px;"></canvas>
   </div>
 
-  <div class="row text-center" style="margin-top:40px;">
-    {{#if showDE}}
-      <input id="hideDE" type="submit" class="button button-secondary" value="Less Effort">
-    {{else}}
-      <input id="showDE" type="submit" class="button button-secondary" value="More Effort">
-    {{/if}}
-    {{#if showDW}}
-      <input id="hideDW" type="submit" class="button button-secondary" value="Less Wellness">
-    {{else}}
-      <input id="showDW" type="submit" class="button button-secondary" value="More Wellness">
-    {{/if}}
-  </div>
-  <!-- smart toggle for detailed wellness -->
   <div class="smartToggleDE" data-collapsed='true' style="height:0px;">
     <div class="container" style="overflow: visible;">
       <canvas id="durationChart" width="20" height="12" style="display: block; margin-top:40px;"></canvas>
@@ -39,4 +22,17 @@
     </div>
   </div>
 
+  <div class="row text-center" style="margin-top:40px;height:auto;">
+    {{#if showDE}}
+      <button id="hideDE" type="submit" class="button button-secondary" style="text-align:center;height:auto;line-height:200%;">Less<br>Effort</button>
+    {{else}}
+      <button id="showDE" type="submit" class="button button-secondary" style="text-align:center;height:auto;line-height:200%;">More<br>Effort</button>
+    {{/if}}
+    {{#if showDW}}
+      <button id="hideDW" type="submit" class="button button-secondary" style="text-align:center;height:auto;line-height:200%;">Less<br>Wellness</button>
+    {{else}}
+      <button id="showDW" type="submit" class="button button-secondary" style="text-align:center;height:auto;line-height:200%;" >More<br>Wellness</button>
+    {{/if}}
+  </div>
+  <!-- smart toggle for detailed wellness -->
 </template>

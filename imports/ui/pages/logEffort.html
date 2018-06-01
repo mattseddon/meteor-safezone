@@ -1,9 +1,74 @@
 <template name="logEffort">
   <div class="container">
-    <!-- <div class="container text-center">
-        <h2>Log Your Effort</h2>
-    </div> -->
-    <form id="log-effort" style="margin-top:50px">
+
+    <div class="row text-center" style="margin-top:20px;">
+      {{#if showInstructions}}
+        <input id="hideInstructions" type="submit" class="button button-secondary" value="Hide instructions">
+      {{else}}
+        <input id="showInstructions" type="submit" class="button button-secondary" value="Show instructions">
+      {{/if}}
+      {{#if showKeyScale}}
+        <input id="hideKeyScale" type="submit" class="button button-secondary" value="Hide RPE scale">
+      {{else}}
+        <input id="showKeyScale" type="submit" class="button button-secondary" value="Show RPE scale">
+      {{/if}}
+    </div>
+
+    <div class="smartToggleInstr" data-collapsed='true' style="height:0px;text-align:center;">
+      <!-- <div class="container" style="text-align:center;"> -->
+        <p style="text-align:left;display: inline-block;">
+          The more consistent you can be with your entries the better.<br>
+          Log your effort as soon as you have completed an activity.<br>
+          You can log as many entries per session as you wish.  I.e one entry per exercise, set of exercises or session.<br>
+          If you are unsure as to which RPE your effort was at then please consult the RPE scale.<br>
+          It is a good idea to check the RPE scale at least once a week as you may forget the specified levels.
+        </p>
+        <p style="text-align:left;display: inline-block;">
+          <strong>Definitions:</strong><br>
+          <strong>Status.   </strong>What is your current training status?<br>
+          <strong>Type.     </strong>What type of effort?<br>
+          <strong>RPE.      </strong>What was your rate of perceived exertion?<br>
+          <strong>Duration. </strong>How long did the effort last for?<br>
+          <strong>Impulse.  </strong>Calculated impulse of the effort (RPE * Duration).<br>
+        </p>
+      <!-- </div> -->
+    </div>
+
+    <div class="smartToggleKey" data-collapsed='true' style="height:0px; font-size:14px;text-align:center;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="height: 80px; color:#000;"><span style="font-size:12px;font-weight: bold; position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"></span></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="height: 80px;background-color:#FC0D00;color:#fff;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);">10</span></div>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="height: 80px;background-color:#FFF;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"><p style="font-size:14px; margin:0;font-weight:bold;">Max Effort</p><p style="margin:0;font-size:10px;">Feels almost impossible to keep going.  Completely out of breath, unable to talk.<br>Cannot maintain for more than a very short period of time.</p></span></div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="height: 80px; color:#000;"><span style="font-size:12px;font-weight: bold; position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"></span></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="height: 80px;background-color:#FF3B30;color:#fff;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);">9</span></div>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="height: 80px;background-color:#FFF;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"><p style="font-size:14px; margin:0;font-weight:bold;">Very Hard</p><p style="margin:0;font-size:10px;">Very difficult to maintain exercise intensity.  Can barely breath and speak only a few words.</p></span></div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="height: 80px; color:#000;"><span style="font-size:12px;font-weight: bold; position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"></span></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="height: 80px;background-color:#FF9500;color:#fff;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);">7-8</span></div>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="height: 80px;background-color:#FFF;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"><p style="font-size:14px; margin:0;font-weight:bold;">Vigorous</p><p style="margin:0;font-size:10px;">Borderline uncomfortable.<br>Short of breath, can speak a sentence.</p></span></div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="height: 80px; color:#000;"><span style="font-size:12px;font-weight: bold; position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"></span></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="height: 80px;background-color:#4CD964;color:#fff;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);">4-6</span></div>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="height: 80px;background-color:#FFF;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"><p style="font-size:14px; margin:0;font-weight:bold;">Moderate</p><p style="margin:0;font-size:10px;">Breathing heavily, can hold a short conversation.<br>Still somewhat comfortable, but becoming noticeably more challenging.</p></span></div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="height: 80px; color:#000;"><span style="font-size:12px;font-weight: bold; position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"></span></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="height: 80px;background-color:#2AC845;color:#fff;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);">2-3</span></div>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="height: 80px;background-color:#FFF;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"><p style="font-size:14px; margin:0;font-weight:bold;">Light</p><p style="margin:0;font-size:10px;">Feels like you could maintain for hours.  Easy to breath and carry a conversation.</p></span></div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="height: 80px; color:#000;"><span style="font-size:12px;font-weight: bold; position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"></span></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="height: 80px;background-color:#1CA72E;color:#fff;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);">1</span></div>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="height: 80px;background-color:#FFF;"><span style="position: relative;float: left;top: 50%;left: 50%;transform: translate(-50%, -50%);"><p style="font-size:14px; margin:0;font-weight:bold;">Very Light</p><p style="margin:0;font-size:10px;">Next to no exertion but more than watching TV.</p></span></div>
+      </div>
+    </div>
+
+
+    <form id="log-effort" style="margin-top:20px">
     <!--<h3 class="page-header">How do you want to order?</h3>-->
 
 <!--
