@@ -1,7 +1,8 @@
 <!-- All charts need to be in one template so they can all be rendered with the same data from the JS -->
 <template name="charts">
+  {{#if Template.subscriptionsReady}}
   <div class="container" style="overflow: visible;">
-    <canvas id="wellnessChart"     width="20" height="12" style="display: block; margin-top:40px;"></canvas>    
+    <canvas id="wellnessChart"     width="20" height="12" style="display: block; margin-top:40px;"></canvas>
     <canvas id="impulseVsWellness" width="20" height="12" style="display: block; margin-top:20px;"></canvas>
     <canvas id="impulseChart"      width="20" height="12" style="display: block; margin-top:40px;"></canvas>
   </div>
@@ -34,5 +35,9 @@
       <button id="showDW" type="submit" class="button button-secondary" style="text-align:center;height:auto;line-height:200%;" >More<br>Wellness</button>
     {{/if}}
   </div>
+  {{else}}
+    <div class="loading">{{>spinner}}</div>
+  {{/if}}
+
   <!-- smart toggle for detailed wellness -->
 </template>

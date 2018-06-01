@@ -10,6 +10,7 @@ export const createChart = function(xValues,chartId,datasets,title,yMax,yTitle){
 
     },
     options: {
+      responsive:true,
       // responsiveAnimationDuration: 2000,
       legend: {
         display: true,
