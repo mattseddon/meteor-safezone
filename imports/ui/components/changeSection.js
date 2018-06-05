@@ -18,6 +18,7 @@ export const collapseSection = function(element) {
     requestAnimationFrame(function() {
       element.style.height = 0 + 'px';
     });
+
   });
 
   // mark the section as "currently collapsed"
@@ -42,6 +43,7 @@ export const expandSection = function (element) {
 
   // mark the section as "currently not collapsed"
   element.setAttribute('data-collapsed', 'false');
+
 }
 
 export const toggleSection = function(section) {
@@ -54,4 +56,5 @@ var isCollapsed = section.getAttribute('data-collapsed') === 'true';
     collapseSection(section)
   }
 
+  return isCollapsed
 }

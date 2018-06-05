@@ -149,8 +149,8 @@ Template.charts.onRendered(function() {
 
       self.impulseVsWellnessCD = [{data:eDataDT['effortImpulse'],borderColor:"#F7C700",backgroundColor:"#F7C700",fill:false,label:'Total Effort (Day)'   ,yAxisID: 'yLeft' },
                                   {data:wDataEE['overall'      ],borderColor:"#09D483",backgroundColor:"#09D483",fill:false,label:'Wellness (Day)'       ,yAxisID: 'yRight'},
-                                  {data:eDataWA['effortImpulse'],borderColor:"#AE8A01",backgroundColor:"#8B6E01"           ,label:"Average Effort (Week)",yAxisID: 'yLeft' },
-                                  {data:wDataWA['overall'      ],borderColor:"#06AD6A",backgroundColor:"#048852"           ,label:"Wellness (Week)"      ,yAxisID: 'yRight'} ];
+                                  {data:eDataWA['effortImpulse'],borderColor:"#AE8A01",backgroundColor:"#AE8A01",fill:false,label:"Average Effort (Week)",yAxisID: 'yLeft' },
+                                  {data:wDataWA['overall'      ],borderColor:"#06AD6A",backgroundColor:"#06AD6A",fill:false,label:"Wellness (Week)"      ,yAxisID: 'yRight'} ];
 
                           // (xValues,chartId,datasets,title,yLMax,yLTitle,yLStepSize,yRMax,yRTitle,yRStepSize)
       self.impulseVsWellnessChart = create2yAxisChart(dates.now,"impulseVsWellness",impulseVsWellnessCD,"Effort vs Wellness",eMax,"Impulse (RPE * Duration)",null ,5.2,"Score",null);

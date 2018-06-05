@@ -18,7 +18,7 @@ export const createChart = function(xValues,chartId,datasets,title,yMax,yTitle){
         labels:{fontSize:10}
       },
       title:{
-        display: true,
+        // display: true,
         text: title
       },
       scales: {
@@ -92,7 +92,7 @@ export const create2yAxisChart = function(xValues,chartId,datasets,title,yLMax,y
             labels:{fontSize:10}
           },
           title:{
-            display: true,
+            // display: true,
             text: title
           },
           scales: {

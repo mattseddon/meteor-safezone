@@ -1,22 +1,11 @@
 <!-- This is a global helper defined by meteor? -->
 <template name='custNavBar'>
 {{#if currentUser}}
-<!-- <nav id="custNavBar" > -->
- <!-- <div class="container" style="background:#33C3F0; width:100%;"> -->
-    <div class="custNavBar" style="width:80%;margin-left:10%; margin-top :0px;">
+    <!-- <div class="custNavBar" style="width:80%;margin-left:10%; margin-top :0px;">
       <div class="pure-menu pure-menu-horizontal">
         <div style="float: left;">
-          <!-- <a href="{{pathFor profile}}" class="pure-menu-horizontal pure-menu-link">Profile</a>
 
-            <a href="{{pathFor logEffort}}" class="pure-menu-horizontal pure-menu-link">Log Effort</a>
-
-            <a href="{{pathFor manageEfforts}}" class="pure-menu-horizontal pure-menu-link">Manage Efforts</a>
-
-            <a href="#" class="pure-menu-horizontal pure-menu-link">Finance</a> -->
-          <!-- <ul class="pure-menu-list" style="height:40px;"> -->
             <li class="pure-menu-item"><a href="{{pathFor 'profile'}}"       class="pure-menu-link" role="button">Profile</a></li>
-            <!-- <li class="pure-menu-item"><a href="{{pathFor 'logEffort'}}"     class="pure-menu-link" role="button">Log Effort</a></li> -->
-            <!-- <li class="pure-menu-item"><a href="{{pathFor 'manageEfforts'}}" class="pure-menu-link" role="button">Manage Efforts</a></li> -->
             <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
               <a id="menuLink1" class="pure-menu-link">Efforts</a>
                 <ul class="pure-menu-children">
@@ -31,14 +20,49 @@
                   <li class="pure-menu-item"><a href="{{pathFor 'manageWellness'}}" class="pure-menu-link">Manage Entries</a></li>
                 </ul>
             </li>
-          <!-- </ul> -->
         </div>
         <div style="float: right;">
           <li class="pure-menu-item"><a id="nav-logout" class="pure-menu-link" role="button">Logout</a></li>
         </div>
-              <!-- <li class="pure-menu-item"><a href="{{pathFor 'logWellness'}}"       class="pure-menu-link" role="button">Log Wellness</a></li> -->
       </div>
-    </div>
+    </div> -->
+
+    <nav class="navbar" style="margin-top :0px;">
+          <div class="container">
+            <ul class="navbar-list">
+              <li class="navbar-item" style="margin-left:2%;"><a class="navbar-link" href="{{pathFor 'profile'}}">profile</a></li>
+              <li class="navbar-item">
+                <a class="navbar-link">effort</a>
+                <div class="popover">
+                  <ul class="popover-list">
+                    <li class="popover-item">
+                      <a class="popover-link" href="{{pathFor 'logEffort'}}">log</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="{{pathFor 'manageEfforts'}}">manage</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="navbar-item">
+                <a class="navbar-link">Wellness</a>
+                <div class="popover">
+                  <ul class="popover-list">
+                    <li class="popover-item">
+                      <a class="popover-link" href="{{pathFor 'logWellness'}}">log</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="{{pathFor 'manageWellness'}}">manage</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <!-- <div "> -->
+                <li class="navbar-item" style="float: right;" id="nav-logout"><a style="margin-right:2%;" class="navbar-link">logout</a></li>
+              <!-- </div> -->
+            </ul>
+          </div>
+        </nav>
   <!-- </div> -->
 <!-- </nav> -->
 {{/if}}

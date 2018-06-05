@@ -1,6 +1,6 @@
 <template name='athleteProfile'>
-  <body>
-    <div class="container">
+  <!-- <body> -->
+    <!-- <div class="container" style="margin-top:80px;"> -->
       <!-- <header> -->
       <!-- <h1>Todo List ({{incompleteCount}})</h1>
 
@@ -19,9 +19,9 @@
       <!-- </header> -->
 
       {{#with athlete}}
-      <h2 style="text-align:center;">{{name}}</h2>
+      <h4 style="text-align:center;margin-top:80px;">{{name}}</h4>
       {{/with}}
-      <h4 style="text-align:center;">Tracking</h4>
+      <h5 style="text-align:center;">Tracking</h5>
 
 
       {{> charts}}
@@ -35,9 +35,9 @@
 
       <div class="row text-center" style="margin-top:20px;">
         {{#if showUpdateInfo}}
-          <input id="hideUpdateInfo" type="submit" class="button button-primary" value="Hide form">
+          <input id="hideUpdateInfo" type="submit" class="button button-secondary" value="Hide form">
         {{else}}
-          <input id="showUpdateInfo" type="submit" class="button button-primary" value="Update infomation">
+          <input id="showUpdateInfo" type="submit" class="button button-secondary" value="Update infomation">
         {{/if}}
       </div>
       <div class="smartToggleForm" data-collapsed='true' style="height:0px;">
@@ -46,6 +46,6 @@
         {{/with}}
       </div>
 
-    </div>
-  </body>
+    <!-- </div> -->
+  <!-- </body> -->
 </template>
