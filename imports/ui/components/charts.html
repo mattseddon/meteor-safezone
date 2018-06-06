@@ -1,46 +1,53 @@
 <!-- All charts need to be in one template so they can all be rendered with the same data from the JS -->
 <template name="charts">
   {{#if Template.subscriptionsReady}}
-  <div class="container" style="text-align:center;overflow: visible;">
+  <div class="container" style="text-align:center;overflow: visible;max-width:750px;">
     <h6>Wellness vs Effort</h6>
-    <canvas id="impulseVsWellness" width="20" height="12" style="display: block;"></canvas>
+    <canvas id="impulseVsWellness" width="20" height="10" style="display:block;"></canvas>
     <h6 style="margin-top:40px;">Wellness</h6>
-    <canvas id="wellnessChart"     width="20" height="12" style="display: block;"></canvas>
+    <canvas id="wellnessLine"     width="20" height="10" style="display: block;"></canvas>
+    <div class="container" style="margin-top:20px;text-align:center;overflow: visible;max-width:600px;">
+      <canvas id="wellnessRadar"       width="10" height="10" style="display: block;margin-top:20px"></canvas>
+    </div>
     <h6 style="margin-top:40px;">Effort</h6>
-    <canvas id="impulseChart"      width="20" height="12" style="display: block;"></canvas>
+    <canvas id="impulseLine"      width="20" height="10" style="display: block;"></canvas>
   </div>
 
   <div class="smartToggleDE" data-collapsed='true' style="height:0px;">
-    <div class="container" style="text-align:center; overflow: visible;">
+    <div class="container" style="text-align:center; overflow: visible;max-width:750px;">
       <h6 style="margin-top:40px;">Duration</h6>
-      <canvas id="durationChart" width="20" height="12" style="display: block;"></canvas>
-      <h6 style="margin-top:40px;">RPE</h6>
-      <canvas id="RPEChart"      width="20" height="12" style="display: block;"></canvas>
+      <canvas id="durationLine" width="20" height="12" style="display: block;"></canvas>
+      <h6 style="margin-top:40px;">Rate of Percieved Exertion (RPE)</h6>
+      <canvas id="RPELine"      width="20" height="12" style="display: block;"></canvas>
     </div>
   </div>
 
   <!-- smart toggle for detailed wellness -->
   <div class="smartToggleDW" data-collapsed='true' style="height:0px;">
-    <div class="container" style="text-align:center;overflow: visible;">
+    <div class="container" style="text-align:center;overflow: visible;max-width:750px;">
+      <h6 style="margin-top:40px;margin-bottom:0px;">Individual Scores</h6>
+      <div class="container" style="text-align:center;overflow: visible;max-width:600px;">
+        <canvas id="physicalRadar"       width="10" height="10" style="display: block;"></canvas>
+      </div>
       <h6 style="margin-top:40px;">Sleep</h6>
-      <canvas id="sleepChart"    width="20" height="12" style="display: block;"></canvas>
+      <canvas id="sleepLine"    width="20" height="12" style="display: block;"></canvas>
       <h6 style="margin-top:40px;">Physical</h6>
-      <canvas id="physicalChart" width="20" height="12" style="display: block;"></canvas>
+      <canvas id="physicalLine" width="20" height="12" style="display: block;"></canvas>
       <h6 style="margin-top:40px;">Mental</h6>
-      <canvas id="mentalChart"   width="20" height="12" style="display: block;"></canvas>
+      <canvas id="mentalLine"   width="20" height="12" style="display: block;"></canvas>
     </div>
   </div>
 
   <div class="row text-center" style="margin-top:40px;height:auto;">
     {{#if showDE}}
-      <button id="hideDE" type="submit" class="button" style="text-align:center;height:auto;line-height:160%;">Less<br>Effort</button>
+      <button id="hideDE" type="submit" class="button button-secondary" style="text-align:center;height:auto;line-height:160%;">Less<br>Effort</button>
     {{else}}
-      <button id="showDE" type="submit" class="button" style="text-align:center;height:auto;line-height:160%;">More<br>Effort</button>
+      <button id="showDE" type="submit" class="button button-secondary" style="text-align:center;height:auto;line-height:160%;">More<br>Effort</button>
     {{/if}}
     {{#if showDW}}
-      <button id="hideDW" type="submit" class="button" style="text-align:center;height:auto;line-height:160%;">Less<br>Wellness</button>
+      <button id="hideDW" type="submit" class="button button-secondary" style="text-align:center;height:auto;line-height:160%;">Less<br>Wellness</button>
     {{else}}
-      <button id="showDW" type="submit" class="button" style="text-align:center;height:auto;line-height:160%;" >More<br>Wellness</button>
+      <button id="showDW" type="submit" class="button button-secondary" style="text-align:center;height:auto;line-height:160%;" >More<br>Wellness</button>
     {{/if}}
   </div>
   {{else}}

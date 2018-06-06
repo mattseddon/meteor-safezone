@@ -1,4 +1,4 @@
-export const createChart = function(xValues,chartId,datasets,title,yMax,yTitle){
+export const createLineChart = function(xValues,chartId,datasets,title,yMax,yTitle){
   var ctx = document.getElementById(chartId);
 
   var anotherChart = new Chart(ctx, {
@@ -74,7 +74,7 @@ export const createChart = function(xValues,chartId,datasets,title,yMax,yTitle){
   return anotherChart;
 }
 
-export const create2yAxisChart = function(xValues,chartId,datasets,title,yLMax,yLTitle,yLStepSize,yRMax,yRTitle,yRStepSize){
+export const create2yAxisLineChart = function(xValues,chartId,datasets,title,yLMax,yLTitle,yLStepSize,yRMax,yRTitle,yRStepSize){
   var ctx = document.getElementById(chartId);
 
   var anotherChart = new Chart(ctx, {
@@ -169,5 +169,44 @@ export const create2yAxisChart = function(xValues,chartId,datasets,title,yLMax,y
           }
       }
   });
+  return anotherChart;
+}
+
+export const createRadarChart = function(xValues,chartId,datasets){
+
+  var ctx = document.getElementById(chartId);
+
+  var anotherChart = new Chart(ctx, {
+      responsive: true,
+      type: 'radar',
+      data: {
+          labels: xValues,
+          datasets: datasets
+        },
+        options: {
+          scale: {
+            ticks: {
+              beginAtZero: true,
+              min: 0,
+              max: 5,
+              stepSize: 1,
+              fontSize:10,
+              userCallback: function(label, index, labels) {
+                if (Math.floor(label) === label && index != 0) {
+                  return label;
+                }
+              },
+            },
+            pointLabels: {
+              fontSize: 12
+            }
+          },
+          legend: {
+            position: 'bottom',
+            labels:{fontSize:10}
+          }
+      }
+    });
+
   return anotherChart;
 }
